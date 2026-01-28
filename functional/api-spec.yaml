@@ -1,0 +1,45 @@
+openapi: 3.0.0
+info:
+  title: "API"
+  version: "1.0.0"
+paths:
+  /v1/authentication:
+    get:
+      operationId: ping-auth
+      summary: Ping authentication controller to see if it is reachable
+      responses:
+        '200':
+          $ref: '#/components/responses/AuthResponse'
+  '/v1/authentication/authenticate-user':
+    post:
+      operationId: authenticate a user
+      summary: For a given username and password, authenticate them.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: authUserRequest
+              type: object
+              properties:
+                hashedPassword: 
+                  type: char[]
+                username: 
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/AuthResponse'
+
+components:
+  responses:
+    AuthResponse:
+      description: OK
+      content:
+        application/json:
+          schema:
+            title: authResponse
+            type: object
+            properties:
+              resp:
+                type: integer
+              authSuccess:
+                type: boolean

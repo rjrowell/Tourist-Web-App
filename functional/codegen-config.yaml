@@ -1,0 +1,17 @@
+generatorName: spring
+inputSpec: api-spec.yaml
+outputDir: ./
+additionalProperties:
+  basePackage: com.rjtoursim.api
+  modelPackage: com.rjtoursim.api.model
+  apiPackage: com.rjtoursim.api.controller
+  delegatePattern: true
+  interfaceOnly: true
+  usePrimitiveTypes: true
+  dateLibrary: java8
+  java8: true
+  useSpringBoot3: true
+  typeMappings:
+    array: char[]
+  languageSpecificPrimitives:
+    - char[]

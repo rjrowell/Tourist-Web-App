@@ -1,0 +1,14 @@
+# Generated API code
+functional/src/main/java/com/rjtourism/api/controller/V1Api.java
+functional/src/main/java/com/rjtourism/api/model
+functional/src/main/java/com/rjtourism/api/controller/ApiUtil.java
+
+# Build output
+functional/target/
+
+# OpenAPI generator metadata
+functional/.openapi-generator/
+functional/.openapi-generator-ignore
+
+# But keep implementations
+#!functional/src/main/java/com/rjtourism/api/controller/*Impl.java
