@@ -12,3 +12,5 @@ functional/.openapi-generator-ignore
 
 # But keep implementations
 #!functional/src/main/java/com/rjtourism/api/controller/*Impl.java
+functional/openapi-generator-cli-7.13.0.jar
+functional/src/main/java/com/rjtoursim/api/model/AuthUserRequest.java
