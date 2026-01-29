@@ -12,7 +12,7 @@ paths:
           $ref: '#/components/responses/AuthResponse'
   '/v1/authentication/authenticate-user':
     post:
-      operationId: authenticate a user
+      operationId: authenticate-user
       summary: For a given username and password, authenticate them.
       requestBody:
         content:

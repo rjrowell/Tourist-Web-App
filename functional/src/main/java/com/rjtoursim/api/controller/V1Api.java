@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-28T18:52:30.447724Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-29T17:51:25.783470Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -50,7 +50,7 @@ public interface V1Api {
      * @return OK (status code 200)
      */
     @Operation(
-        operationId = "authenticateAUser",
+        operationId = "authenticateUser",
         summary = "For a given username and password, authenticate them.",
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
@@ -65,14 +65,14 @@ public interface V1Api {
         consumes = { "application/json" }
     )
     
-    default ResponseEntity<AuthResponse> _authenticateAUser(
+    default ResponseEntity<AuthResponse> _authenticateUser(
         @Parameter(name = "AuthUserRequest", description = "") @Valid @RequestBody(required = false) AuthUserRequest authUserRequest
     ) {
-        return authenticateAUser(authUserRequest);
+        return authenticateUser(authUserRequest);
     }
 
     // Override this method
-    default  ResponseEntity<AuthResponse> authenticateAUser(AuthUserRequest authUserRequest) {
+    default  ResponseEntity<AuthResponse> authenticateUser(AuthUserRequest authUserRequest) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

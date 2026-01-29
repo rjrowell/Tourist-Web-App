@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.openapitools</groupId>
-    <artifactId>openapi-spring</artifactId>
+    <groupId>com.rjtoursim</groupId>
+    <artifactId>functional</artifactId>
+    <name>RJ Tourism API</name>
     <packaging>jar</packaging>
-    <name>openapi-spring</name>
     <version>1.0.0</version>
     <properties>
         <java.version>17</java.version>
@@ -37,6 +37,29 @@
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>
+            <!--<plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.13.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/api-spec.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configurationFile>${project.basedir}/codegen-config.yaml</configurationFile>
+                            <typeMappings>
+                                <typeMapping>char[]=char[]</typeMapping>
+                            </typeMappings>
+                            <languageSpecificPrimitives>
+                                <languageSpecificPrimitive>char[]</languageSpecificPrimitive>
+                            </languageSpecificPrimitives>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>

@@ -11,7 +11,3 @@ additionalProperties:
   dateLibrary: java8
   java8: true
   useSpringBoot3: true
-  typeMappings:
-    array: char[]
-  languageSpecificPrimitives:
-    - char[]
