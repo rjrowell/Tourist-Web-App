@@ -1,4 +1,27 @@
 
+# To start app
+1. run sudo docker compose up -d
+2. run sudo docker compose ps
+3. run application
+
+# ACCESS DATABASE
+docker exec -it rjtourism-postgres psql -U admin -d rjtourism
+
+# BACKUP (Simple)
+docker exec rjtourism-postgres pg_dump -U admin rjtourism > backup.sql
+
+# BACKUP (Compressed)
+docker exec rjtourism-postgres pg_dump -U admin rjtourism | gzip > backup.sql.gz
+
+# RESTORE
+docker exec -i rjtourism-postgres psql -U admin -d rjtourism < backup.sql
+
+# VIEW LOGS
+docker logs rjtourism-postgres
+
+# VIEW REAL-TIME LOGS
+docker logs -f rjtourism-postgres
+
 # OpenAPI generated API stub
 
 Spring Framework stub
