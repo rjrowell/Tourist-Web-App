@@ -45,11 +45,11 @@ public class Post {
   private LocalDateTime datePosted;
 
   //One post can have many likes
-  @OneToMany(mappedBy = "posts", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Like> likes = new ArrayList<>();
 
   //One post can have many comments
-  @OneToMany(mappedBy = "posts", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Like> comments = new ArrayList<>();
 
   /**
