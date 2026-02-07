@@ -17,18 +17,18 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * AuthUserRequest
+ * CreateUserRequest
  */
 
-@JsonTypeName("authUserRequest")
+@JsonTypeName("createUserRequest")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-07T22:21:15.413124460Z[Europe/London]", comments = "Generator version: 7.13.0")
-public class AuthUserRequest {
+public class CreateUserRequest {
 
   private @Nullable String hashedPassword;
 
   private @Nullable String username;
 
-  public AuthUserRequest hashedPassword(String hashedPassword) {
+  public CreateUserRequest hashedPassword(String hashedPassword) {
     this.hashedPassword = hashedPassword;
     return this;
   }
@@ -48,7 +48,7 @@ public class AuthUserRequest {
     this.hashedPassword = hashedPassword;
   }
 
-  public AuthUserRequest username(String username) {
+  public CreateUserRequest username(String username) {
     this.username = username;
     return this;
   }
@@ -76,9 +76,9 @@ public class AuthUserRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AuthUserRequest authUserRequest = (AuthUserRequest) o;
-    return Objects.equals(this.hashedPassword, authUserRequest.hashedPassword) &&
-        Objects.equals(this.username, authUserRequest.username);
+    CreateUserRequest createUserRequest = (CreateUserRequest) o;
+    return Objects.equals(this.hashedPassword, createUserRequest.hashedPassword) &&
+        Objects.equals(this.username, createUserRequest.username);
   }
 
   @Override
@@ -89,7 +89,7 @@ public class AuthUserRequest {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AuthUserRequest {\n");
+    sb.append("class CreateUserRequest {\n");
     sb.append("    hashedPassword: ").append(toIndentedString(hashedPassword)).append("\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("}");

@@ -22,12 +22,32 @@ paths:
               type: object
               properties:
                 hashedPassword: 
-                  type: char[]
+                  type: string
                 username: 
                   type: string
       responses:
         '200':
           $ref: '#/components/responses/AuthResponse'
+  '/v1/account/create-user':
+    post:
+      operationId: create-user
+      summary: Create a user account with a given username and password.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: createUserRequest
+              type: object
+              properties:
+                hashedPassword: 
+                  type: string
+                username: 
+                  type: string
+      responses:
+        '201':
+          description: Created
+        '409':
+          description: Conflict - Username already exists
 
 components:
   responses:

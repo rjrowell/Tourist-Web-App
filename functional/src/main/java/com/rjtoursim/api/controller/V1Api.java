@@ -7,6 +7,7 @@ package com.rjtoursim.api.controller;
 
 import com.rjtoursim.api.model.AuthResponse;
 import com.rjtoursim.api.model.AuthUserRequest;
+import com.rjtoursim.api.model.CreateUserRequest;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -34,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-29T18:00:27.044696Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-07T22:21:15.413124460Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -82,6 +83,40 @@ public interface V1Api {
                 }
             }
         });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * POST /v1/account/create-user : Create a user account with a given username and password.
+     *
+     * @param createUserRequest  (optional)
+     * @return Created (status code 201)
+     *         or Conflict - Username already exists (status code 409)
+     */
+    @Operation(
+        operationId = "createUser",
+        summary = "Create a user account with a given username and password.",
+        responses = {
+            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(responseCode = "409", description = "Conflict - Username already exists")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/v1/account/create-user",
+        consumes = { "application/json" }
+    )
+    
+    default ResponseEntity<Void> _createUser(
+        @Parameter(name = "CreateUserRequest", description = "") @Valid @RequestBody(required = false) CreateUserRequest createUserRequest
+    ) {
+        return createUser(createUserRequest);
+    }
+
+    // Override this method
+    default  ResponseEntity<Void> createUser(CreateUserRequest createUserRequest) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
