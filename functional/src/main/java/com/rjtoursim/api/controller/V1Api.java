@@ -5,9 +5,7 @@
  */
 package com.rjtoursim.api.controller;
 
-import com.rjtoursim.api.model.AuthResponse;
-import com.rjtoursim.api.model.AuthUserRequest;
-import com.rjtoursim.api.model.CreateUserRequest;
+import com.rjtoursim.api.model.UserCredentials;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-07T22:21:15.413124460Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-09T23:05:07.263961610Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -47,42 +45,34 @@ public interface V1Api {
     /**
      * POST /v1/authentication/authenticate-user : For a given username and password, authenticate them.
      *
-     * @param authUserRequest  (optional)
-     * @return OK (status code 200)
+     * @param userCredentials  (optional)
+     * @return Authenitcation successfull (status code 200)
+     *         or Unauthorized - Invalid username or password (status code 401)
+     *         or Internal Server Error - Something went wrong on the server side (status code 500)
      */
     @Operation(
         operationId = "authenticateUser",
         summary = "For a given username and password, authenticate them.",
         responses = {
-            @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = AuthResponse.class))
-            })
+            @ApiResponse(responseCode = "200", description = "Authenitcation successfull"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized - Invalid username or password"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error - Something went wrong on the server side")
         }
     )
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/v1/authentication/authenticate-user",
-        produces = { "application/json" },
         consumes = { "application/json" }
     )
     
-    default ResponseEntity<AuthResponse> _authenticateUser(
-        @Parameter(name = "AuthUserRequest", description = "") @Valid @RequestBody(required = false) AuthUserRequest authUserRequest
+    default ResponseEntity<Void> _authenticateUser(
+        @Parameter(name = "UserCredentials", description = "") @Valid @RequestBody(required = false) UserCredentials userCredentials
     ) {
-        return authenticateUser(authUserRequest);
+        return authenticateUser(userCredentials);
     }
 
     // Override this method
-    default  ResponseEntity<AuthResponse> authenticateUser(AuthUserRequest authUserRequest) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"resp\" : 0, \"authSuccess\" : true }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
+    default  ResponseEntity<Void> authenticateUser(UserCredentials userCredentials) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -91,7 +81,7 @@ public interface V1Api {
     /**
      * POST /v1/account/create-user : Create a user account with a given username and password.
      *
-     * @param createUserRequest  (optional)
+     * @param userCredentials  (optional)
      * @return Created (status code 201)
      *         or Conflict - Username already exists (status code 409)
      */
@@ -110,13 +100,13 @@ public interface V1Api {
     )
     
     default ResponseEntity<Void> _createUser(
-        @Parameter(name = "CreateUserRequest", description = "") @Valid @RequestBody(required = false) CreateUserRequest createUserRequest
+        @Parameter(name = "UserCredentials", description = "") @Valid @RequestBody(required = false) UserCredentials userCredentials
     ) {
-        return createUser(createUserRequest);
+        return createUser(userCredentials);
     }
 
     // Override this method
-    default  ResponseEntity<Void> createUser(CreateUserRequest createUserRequest) {
+    default  ResponseEntity<Void> createUser(UserCredentials userCredentials) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -125,40 +115,28 @@ public interface V1Api {
     /**
      * GET /v1/authentication : Ping authentication controller to see if it is reachable
      *
-     * @return OK (status code 200)
+     * @return Pinged successfully (status code 200)
      */
     @Operation(
         operationId = "pingAuth",
         summary = "Ping authentication controller to see if it is reachable",
         responses = {
-            @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = AuthResponse.class))
-            })
+            @ApiResponse(responseCode = "200", description = "Pinged successfully")
         }
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/v1/authentication",
-        produces = { "application/json" }
+        value = "/v1/authentication"
     )
     
-    default ResponseEntity<AuthResponse> _pingAuth(
+    default ResponseEntity<Void> _pingAuth(
         
     ) {
         return pingAuth();
     }
 
     // Override this method
-    default  ResponseEntity<AuthResponse> pingAuth() {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"resp\" : 0, \"authSuccess\" : true }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
+    default  ResponseEntity<Void> pingAuth() {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

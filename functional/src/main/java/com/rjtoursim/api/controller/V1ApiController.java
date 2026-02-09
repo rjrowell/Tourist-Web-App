@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rjtoursim.api.model.CreateUserRequest;
+import com.rjtoursim.api.model.UserCredentials;
 import com.rjtoursim.entity.User;
 import com.rjtoursim.repository.UserRepository;
 
@@ -20,7 +20,7 @@ public class V1ApiController implements V1Api {
     private UserRepository userRepository;
 
     @Override
-    public ResponseEntity<Void> createUser(CreateUserRequest createUserRequest) {
+    public ResponseEntity<Void> createUser(UserCredentials createUserRequest) {
         
         //Check if the username is already taken, if so return a 409 Conflict status code
         if (userRepository.findByUsername(createUserRequest.getUsername()).isPresent()){

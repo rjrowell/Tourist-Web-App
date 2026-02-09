@@ -16,7 +16,7 @@ import org.springframework.http.MediaType;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rjtoursim.Application;
-import com.rjtoursim.api.model.CreateUserRequest;
+import com.rjtoursim.api.model.UserCredentials;
 import com.rjtoursim.entity.User;
 import com.rjtoursim.repository.UserRepository;
 
@@ -37,7 +37,7 @@ public class CreateUserTest {
 
 	@Test
 	public void createUserViaAPI() throws Exception{
-		CreateUserRequest request = new CreateUserRequest();
+		UserCredentials request = new UserCredentials();
 		request.setUsername("testuser");
 		request.setHashedPassword("password123");
 
@@ -56,7 +56,7 @@ public class CreateUserTest {
 	public void createUserWithExistingUsername() throws Exception {
 		userRepository.save(new User("existingUser", "existingPassword"));
 
-		CreateUserRequest request = new CreateUserRequest();
+		UserCredentials request = new UserCredentials();
 		request.setUsername("existingUser");
 		request.setHashedPassword("existingPassword");
 

@@ -9,7 +9,7 @@ paths:
       summary: Ping authentication controller to see if it is reachable
       responses:
         '200':
-          $ref: '#/components/responses/AuthResponse'
+          description: Pinged successfully
   '/v1/authentication/authenticate-user':
     post:
       operationId: authenticate-user
@@ -18,16 +18,14 @@ paths:
         content:
           application/json:
             schema:
-              title: authUserRequest
-              type: object
-              properties:
-                hashedPassword: 
-                  type: string
-                username: 
-                  type: string
+              $ref: '#/components/schemas/UserCredentials'
       responses:
         '200':
-          $ref: '#/components/responses/AuthResponse'
+          description: Authenitcation successfull
+        '401':
+          description: Unauthorized - Invalid username or password
+        '500':
+          description: Internal Server Error - Something went wrong on the server side
   '/v1/account/create-user':
     post:
       operationId: create-user
@@ -36,13 +34,7 @@ paths:
         content:
           application/json:
             schema:
-              title: createUserRequest
-              type: object
-              properties:
-                hashedPassword: 
-                  type: string
-                username: 
-                  type: string
+              $ref: '#/components/schemas/UserCredentials'
       responses:
         '201':
           description: Created
@@ -50,6 +42,18 @@ paths:
           description: Conflict - Username already exists
 
 components:
+  schemas:
+    UserCredentials:
+      title: UserCredentials
+      type: object
+      properties:
+        hashedPassword: 
+          type: string
+        username: 
+          type: string
+      required:
+        - username
+        - hashedPassword
   responses:
     AuthResponse:
       description: OK

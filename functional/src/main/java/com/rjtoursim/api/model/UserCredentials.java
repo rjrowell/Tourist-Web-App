@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -17,18 +16,29 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * CreateUserRequest
+ * UserCredentials
  */
 
-@JsonTypeName("createUserRequest")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-07T22:21:15.413124460Z[Europe/London]", comments = "Generator version: 7.13.0")
-public class CreateUserRequest {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-09T23:05:07.263961610Z[Europe/London]", comments = "Generator version: 7.13.0")
+public class UserCredentials {
 
-  private @Nullable String hashedPassword;
+  private String hashedPassword;
 
-  private @Nullable String username;
+  private String username;
 
-  public CreateUserRequest hashedPassword(String hashedPassword) {
+  public UserCredentials() {
+    super();
+  }
+
+  /**
+   * Constructor with only required parameters
+   */
+  public UserCredentials(String hashedPassword, String username) {
+    this.hashedPassword = hashedPassword;
+    this.username = username;
+  }
+
+  public UserCredentials hashedPassword(String hashedPassword) {
     this.hashedPassword = hashedPassword;
     return this;
   }
@@ -37,8 +47,8 @@ public class CreateUserRequest {
    * Get hashedPassword
    * @return hashedPassword
    */
-  
-  @Schema(name = "hashedPassword", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "hashedPassword", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("hashedPassword")
   public String getHashedPassword() {
     return hashedPassword;
@@ -48,7 +58,7 @@ public class CreateUserRequest {
     this.hashedPassword = hashedPassword;
   }
 
-  public CreateUserRequest username(String username) {
+  public UserCredentials username(String username) {
     this.username = username;
     return this;
   }
@@ -57,8 +67,8 @@ public class CreateUserRequest {
    * Get username
    * @return username
    */
-  
-  @Schema(name = "username", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @NotNull 
+  @Schema(name = "username", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("username")
   public String getUsername() {
     return username;
@@ -76,9 +86,9 @@ public class CreateUserRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreateUserRequest createUserRequest = (CreateUserRequest) o;
-    return Objects.equals(this.hashedPassword, createUserRequest.hashedPassword) &&
-        Objects.equals(this.username, createUserRequest.username);
+    UserCredentials userCredentials = (UserCredentials) o;
+    return Objects.equals(this.hashedPassword, userCredentials.hashedPassword) &&
+        Objects.equals(this.username, userCredentials.username);
   }
 
   @Override
@@ -89,7 +99,7 @@ public class CreateUserRequest {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CreateUserRequest {\n");
+    sb.append("class UserCredentials {\n");
     sb.append("    hashedPassword: ").append(toIndentedString(hashedPassword)).append("\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("}");
