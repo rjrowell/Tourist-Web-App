@@ -41,8 +41,19 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Like> comments = new ArrayList<>();
 
+  //Default constructor
   public User(String username, String password) {
     this.username = username;
     this.password = password;
+  }
+
+  //Getters and setters
+
+  public String getUsername() {
+    return this.username;
+  }
+
+  public String getPassword() {
+    return this.password;
   }
 }

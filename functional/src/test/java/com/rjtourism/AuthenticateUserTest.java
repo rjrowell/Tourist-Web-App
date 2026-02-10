@@ -5,6 +5,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rjtoursim.Application;
+import com.rjtoursim.api.model.UserCredentials;
+import com.rjtoursim.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,86 +19,89 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rjtoursim.Application;
-import com.rjtoursim.api.model.UserCredentials;
-import com.rjtoursim.repository.UserRepository;
-
+/**
+ * This class contains functional tests for the user authentication endpoint.
+ */
 @SpringBootTest(classes = Application.class)
 @AutoConfigureMockMvc
 @Transactional
 @Rollback(true)
 public class AuthenticateUserTest {
-	@Autowired
-	private MockMvc mockMvc;
+  @Autowired
+  private MockMvc mockMvc;
 
-	@Autowired
-	private ObjectMapper objectMapper;
-	
-	@Autowired
-	private UserRepository userRepository;
+  @Autowired
+  private ObjectMapper objectMapper;
 
-	private UserCredentials request = new UserCredentials();
+  @Autowired
+  private UserRepository userRepository;
 
-	@BeforeEach
-	public void setup() {
-		request.setUsername("testuser");
-		request.setHashedPassword("password123");
+  private UserCredentials request = new UserCredentials();
 
-		// Only create the user if it doesn't already exist in the database
-		if (userRepository.findByUsername("testuser").isEmpty()) {
-			try {
-				String requestBody = objectMapper.writeValueAsString(request);
-				mockMvc.perform(post("/v1/account/create-user")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(requestBody))
-				.andExpect(status().isCreated());
-			} catch (Exception e) {
-				fail("Failed to create user: " + e.getMessage());
-			}
-		}
+  /**
+   * Setup method that runs before each test.
+   */
+  @BeforeEach
+  public void setup() {
+    request.setUsername("testuser");
+    request.setHashedPassword("password123");
 
-	}
-    
-	@Test
-	public void pingAuthenticationController() {
-		//Send a ping request to the authentication controller to see if it is reachable
-		try {
-			mockMvc.perform(get("/v1/authentication")
-			.contentType(MediaType.APPLICATION_JSON))
-			.andExpect(status().isOk());
-		} catch (Exception e) {
-			fail("Failed to ping authentication controller: " + e.getMessage());
-		}
-	}
+    // Only create the user if it doesn't already exist in the database
+    if (userRepository.findByUsername("testuser").isEmpty()) {
+      try {
+        String requestBody = objectMapper.writeValueAsString(request);
+        mockMvc.perform(post("/v1/account/create-user")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+            .andExpect(status().isCreated());
+      } catch (Exception e) {
+        fail("Failed to create user: " + e.getMessage());
+      }
+    }
 
-	@Test
-	public void authenticateUserViaAPI() {
-		//Test the user from setup can be authenticated successfully
-		try {
-			String requestBody = objectMapper.writeValueAsString(request);
-			mockMvc.perform(post("/v1/authentication/authenticate-user")
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(requestBody))
-			.andExpect(status().isOk());
-		} catch (Exception e) {
-			fail("Failed to authenticate user: " + e.getMessage());
-		}
   }
 
-	@Test
-	public void authenticateUserWithInvalidCredentials() {
-		//Change the password to an incorrect one and verify that authentication fails with a 401 Unauthorized status code
-		request.setHashedPassword("wrongPass");
+  @Test
+  public void pingAuthenticationController() {
+    //Send a ping request to the authentication controller to see if it is reachable
+    try {
+      mockMvc.perform(get("/v1/authentication")
+          .contentType(MediaType.APPLICATION_JSON))
+          .andExpect(status().isOk());
+    } catch (Exception e) {
+      fail("Failed to ping authentication controller: " + e.getMessage());
+    }
+  }
 
-		try {
-			String requestBody = objectMapper.writeValueAsString(request);
-			mockMvc.perform(post("/v1/authentication/authenticate-user")
-			.contentType(MediaType.APPLICATION_JSON)
-			.content(requestBody))
-			.andExpect(status().isUnauthorized());
-		} catch (Exception e) {
-			fail("Failed to authenticate user with invalid credentials: " + e.getMessage());
-		}
-	}
+  @Test
+  public void authenticateUserViaApi() {
+    //Test the user from setup can be authenticated successfully
+    try {
+      String requestBody = objectMapper.writeValueAsString(request);
+      System.out.println("Username: " + request.getUsername());
+      System.out.println("Password: " + request.getHashedPassword());
+      mockMvc.perform(post("/v1/authentication/authenticate-user")
+          .contentType(MediaType.APPLICATION_JSON)
+          .content(requestBody))
+          .andExpect(status().isOk());
+    } catch (Exception e) {
+      fail("Failed to authenticate user: " + e.getMessage());
+    }
+  }
+
+  @Test
+  public void authenticateUserWithInvalidCredentials() {
+    //Change the password to an incorrect one and verify that authentication fails
+    request.setHashedPassword("wrongPass");
+
+    try {
+      String requestBody = objectMapper.writeValueAsString(request);
+      mockMvc.perform(post("/v1/authentication/authenticate-user")
+          .contentType(MediaType.APPLICATION_JSON)
+          .content(requestBody))
+          .andExpect(status().isUnauthorized());
+    } catch (Exception e) {
+      fail("Failed to authenticate user with invalid credentials: " + e.getMessage());
+    }
+  }
 }
