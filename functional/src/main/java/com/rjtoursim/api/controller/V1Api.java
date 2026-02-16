@@ -5,6 +5,9 @@
  */
 package com.rjtoursim.api.controller;
 
+import com.rjtoursim.api.model.CreatePostRequest;
+import com.rjtoursim.api.model.GetPostRequest;
+import com.rjtoursim.api.model.GetPostResponse;
 import com.rjtoursim.api.model.UserCredentials;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +36,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-09T23:05:07.263961610Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-16T00:42:11.940841605Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -79,6 +82,38 @@ public interface V1Api {
 
 
     /**
+     * POST /v1/content/create-post : Create a post with a given title and content.
+     *
+     * @param createPostRequest  (optional)
+     * @return Created (status code 201)
+     */
+    @Operation(
+        operationId = "createPost",
+        summary = "Create a post with a given title and content.",
+        responses = {
+            @ApiResponse(responseCode = "201", description = "Created")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/v1/content/create-post",
+        consumes = { "application/json" }
+    )
+    
+    default ResponseEntity<Void> _createPost(
+        @Parameter(name = "CreatePostRequest", description = "") @Valid @RequestBody(required = false) CreatePostRequest createPostRequest
+    ) {
+        return createPost(createPostRequest);
+    }
+
+    // Override this method
+    default  ResponseEntity<Void> createPost(CreatePostRequest createPostRequest) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
      * POST /v1/account/create-user : Create a user account with a given username and password.
      *
      * @param userCredentials  (optional)
@@ -107,6 +142,52 @@ public interface V1Api {
 
     // Override this method
     default  ResponseEntity<Void> createUser(UserCredentials userCredentials) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /v1/content/get-post : Get a post with a given post id.
+     *
+     * @param getPostRequest  (optional)
+     * @return OK (status code 200)
+     *         or Not Found - No post found with the given post id (status code 404)
+     */
+    @Operation(
+        operationId = "getPost",
+        summary = "Get a post with a given post id.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = GetPostResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found - No post found with the given post id")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/v1/content/get-post",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    
+    default ResponseEntity<GetPostResponse> _getPost(
+        @Parameter(name = "GetPostRequest", description = "") @Valid @RequestBody(required = false) GetPostRequest getPostRequest
+    ) {
+        return getPost(getPostRequest);
+    }
+
+    // Override this method
+    default  ResponseEntity<GetPostResponse> getPost(GetPostRequest getPostRequest) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"address\" : \"address\", \"description\" : \"description\", \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\" }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

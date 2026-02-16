@@ -40,6 +40,64 @@ paths:
           description: Created
         '409':
           description: Conflict - Username already exists
+  '/v1/content/create-post':
+    post:
+      operationId: create-post
+      summary: Create a post with a given title and content.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: CreatePostRequest
+              type: object
+              properties:
+                username:
+                  type: string
+                title:
+                  type: string
+                description:
+                  type: string
+                address:
+                  type: string
+                datePosted:
+                  type: string
+                  format: date-time
+      responses:
+        '201':
+          description: Created
+  '/v1/content/get-post':
+    get:
+      operationId: get-post
+      summary: Get a post with a given post id.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: GetPostRequest
+              type: object
+              properties:
+                postId:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: GetPostResponse
+                type: object
+                properties:
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  address:
+                    type: string
+                  datePosted:
+                    type: string
+                    format: date-time
+        '404':
+          description: Not Found - No post found with the given post id
 
 components:
   schemas:
