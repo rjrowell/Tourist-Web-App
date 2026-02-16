@@ -6,8 +6,7 @@
 package com.rjtoursim.api.controller;
 
 import com.rjtoursim.api.model.CreatePostRequest;
-import com.rjtoursim.api.model.GetPostRequest;
-import com.rjtoursim.api.model.GetPostResponse;
+import com.rjtoursim.api.model.FetchPostsResponse;
 import com.rjtoursim.api.model.UserCredentials;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-16T13:45:19.834268Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-16T17:06:21.109123Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -148,41 +147,39 @@ public interface V1Api {
 
 
     /**
-     * GET /v1/content/get-post : Get a post with a given post id.
+     * GET /v1/content/fetch-posts : Fetch all posts.
      *
-     * @param getPostRequest  (optional)
      * @return OK (status code 200)
-     *         or Not Found - No post found with the given post id (status code 404)
+     *         or Not Found - No posts found (status code 404)
      */
     @Operation(
-        operationId = "getPost",
-        summary = "Get a post with a given post id.",
+        operationId = "fetchPosts",
+        summary = "Fetch all posts.",
         responses = {
             @ApiResponse(responseCode = "200", description = "OK", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = GetPostResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = FetchPostsResponse.class))
             }),
-            @ApiResponse(responseCode = "404", description = "Not Found - No post found with the given post id")
+            @ApiResponse(responseCode = "404", description = "Not Found - No posts found")
         }
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/v1/content/get-post",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+        value = "/v1/content/fetch-posts",
+        produces = { "application/json" }
     )
     
-    default ResponseEntity<GetPostResponse> _getPost(
-        @Parameter(name = "GetPostRequest", description = "") @Valid @RequestBody(required = false) GetPostRequest getPostRequest
+    default ResponseEntity<FetchPostsResponse> _fetchPosts(
+        
     ) {
-        return getPost(getPostRequest);
+        return fetchPosts();
     }
 
     // Override this method
-    default  ResponseEntity<GetPostResponse> getPost(GetPostRequest getPostRequest) {
+    default  ResponseEntity<FetchPostsResponse> fetchPosts() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"address\" : \"address\", \"description\" : \"description\", \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\" }";
+                    String exampleString = "{ \"posts\" : [ { \"address\" : \"address\", \"description\" : \"description\", \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"username\" : \"username\" }, { \"address\" : \"address\", \"description\" : \"description\", \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"username\" : \"username\" } ] }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

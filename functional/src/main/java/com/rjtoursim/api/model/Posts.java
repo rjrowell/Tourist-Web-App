@@ -18,13 +18,13 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * CreatePostRequest
+ * Posts
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-16T17:06:21.109123Z[Europe/London]", comments = "Generator version: 7.13.0")
-public class CreatePostRequest {
+public class Posts {
 
-  private @Nullable Integer userId;
+  private @Nullable String username;
 
   private @Nullable String title;
 
@@ -35,27 +35,27 @@ public class CreatePostRequest {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private @Nullable OffsetDateTime datePosted;
 
-  public CreatePostRequest userId(Integer userId) {
-    this.userId = userId;
+  public Posts username(String username) {
+    this.username = username;
     return this;
   }
 
   /**
-   * Get userId
-   * @return userId
+   * Get username
+   * @return username
    */
   
-  @Schema(name = "userId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("userId")
-  public Integer getUserId() {
-    return userId;
+  @Schema(name = "username", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("username")
+  public String getUsername() {
+    return username;
   }
 
-  public void setUserId(Integer userId) {
-    this.userId = userId;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
-  public CreatePostRequest title(String title) {
+  public Posts title(String title) {
     this.title = title;
     return this;
   }
@@ -75,7 +75,7 @@ public class CreatePostRequest {
     this.title = title;
   }
 
-  public CreatePostRequest description(String description) {
+  public Posts description(String description) {
     this.description = description;
     return this;
   }
@@ -95,7 +95,7 @@ public class CreatePostRequest {
     this.description = description;
   }
 
-  public CreatePostRequest address(String address) {
+  public Posts address(String address) {
     this.address = address;
     return this;
   }
@@ -115,7 +115,7 @@ public class CreatePostRequest {
     this.address = address;
   }
 
-  public CreatePostRequest datePosted(OffsetDateTime datePosted) {
+  public Posts datePosted(OffsetDateTime datePosted) {
     this.datePosted = datePosted;
     return this;
   }
@@ -143,24 +143,24 @@ public class CreatePostRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CreatePostRequest createPostRequest = (CreatePostRequest) o;
-    return Objects.equals(this.userId, createPostRequest.userId) &&
-        Objects.equals(this.title, createPostRequest.title) &&
-        Objects.equals(this.description, createPostRequest.description) &&
-        Objects.equals(this.address, createPostRequest.address) &&
-        Objects.equals(this.datePosted, createPostRequest.datePosted);
+    Posts posts = (Posts) o;
+    return Objects.equals(this.username, posts.username) &&
+        Objects.equals(this.title, posts.title) &&
+        Objects.equals(this.description, posts.description) &&
+        Objects.equals(this.address, posts.address) &&
+        Objects.equals(this.datePosted, posts.datePosted);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, title, description, address, datePosted);
+    return Objects.hash(username, title, description, address, datePosted);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CreatePostRequest {\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("class Posts {\n");
+    sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    address: ").append(toIndentedString(address)).append("\n");

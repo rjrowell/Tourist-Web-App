@@ -65,39 +65,38 @@ paths:
       responses:
         '201':
           description: Created
-  '/v1/content/get-post':
+  '/v1/content/fetch-posts':
     get:
-      operationId: get-post
-      summary: Get a post with a given post id.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              title: GetPostRequest
-              type: object
-              properties:
-                postId:
-                  type: integer
+      operationId: fetch-posts
+      summary: Fetch all posts.
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                title: GetPostResponse
+                title: FetchPostsResponse
                 type: object
                 properties:
-                  title:
-                    type: string
-                  description:
-                    type: string
-                  address:
-                    type: string
-                  datePosted:
-                    type: string
-                    format: date-time
+                  posts:
+                    type: array
+                    items:
+                      title: Posts
+                      type: object
+                      properties: 
+                        username:
+                          type: string
+                        title:
+                          type: string
+                        description:
+                          type: string
+                        address:
+                          type: string
+                        datePosted:
+                          type: string
+                          format: date-time
         '404':
-          description: Not Found - No post found with the given post id
+          description: Not Found - No posts found
 
 components:
   schemas:

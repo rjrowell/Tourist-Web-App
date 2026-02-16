@@ -4,7 +4,10 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.rjtoursim.api.model.Posts;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -17,55 +20,41 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * AuthResponse
+ * FetchPostsResponse
  */
 
-@JsonTypeName("authResponse")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-16T17:06:21.109123Z[Europe/London]", comments = "Generator version: 7.13.0")
-public class AuthResponse {
+public class FetchPostsResponse {
 
-  private @Nullable Integer resp;
+  @Valid
+  private List<@Valid Posts> posts = new ArrayList<>();
 
-  private @Nullable Boolean authSuccess;
+  public FetchPostsResponse posts(List<@Valid Posts> posts) {
+    this.posts = posts;
+    return this;
+  }
 
-  public AuthResponse resp(Integer resp) {
-    this.resp = resp;
+  public FetchPostsResponse addPostsItem(Posts postsItem) {
+    if (this.posts == null) {
+      this.posts = new ArrayList<>();
+    }
+    this.posts.add(postsItem);
     return this;
   }
 
   /**
-   * Get resp
-   * @return resp
+   * Get posts
+   * @return posts
    */
-  
-  @Schema(name = "resp", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("resp")
-  public Integer getResp() {
-    return resp;
+  @Valid 
+  @Schema(name = "posts", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("posts")
+  public List<@Valid Posts> getPosts() {
+    return posts;
   }
 
-  public void setResp(Integer resp) {
-    this.resp = resp;
-  }
-
-  public AuthResponse authSuccess(Boolean authSuccess) {
-    this.authSuccess = authSuccess;
-    return this;
-  }
-
-  /**
-   * Get authSuccess
-   * @return authSuccess
-   */
-  
-  @Schema(name = "authSuccess", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("authSuccess")
-  public Boolean getAuthSuccess() {
-    return authSuccess;
-  }
-
-  public void setAuthSuccess(Boolean authSuccess) {
-    this.authSuccess = authSuccess;
+  public void setPosts(List<@Valid Posts> posts) {
+    this.posts = posts;
   }
 
   @Override
@@ -76,22 +65,20 @@ public class AuthResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    AuthResponse authResponse = (AuthResponse) o;
-    return Objects.equals(this.resp, authResponse.resp) &&
-        Objects.equals(this.authSuccess, authResponse.authSuccess);
+    FetchPostsResponse fetchPostsResponse = (FetchPostsResponse) o;
+    return Objects.equals(this.posts, fetchPostsResponse.posts);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(resp, authSuccess);
+    return Objects.hash(posts);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AuthResponse {\n");
-    sb.append("    resp: ").append(toIndentedString(resp)).append("\n");
-    sb.append("    authSuccess: ").append(toIndentedString(authSuccess)).append("\n");
+    sb.append("class FetchPostsResponse {\n");
+    sb.append("    posts: ").append(toIndentedString(posts)).append("\n");
     sb.append("}");
     return sb.toString();
   }
