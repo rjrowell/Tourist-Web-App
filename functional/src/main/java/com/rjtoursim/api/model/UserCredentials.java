@@ -19,7 +19,7 @@ import jakarta.annotation.Generated;
  * UserCredentials
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-16T00:42:11.940841605Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-16T00:55:37.420629408Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class UserCredentials {
 
   private String hashedPassword;

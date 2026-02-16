@@ -51,8 +51,8 @@ paths:
               title: CreatePostRequest
               type: object
               properties:
-                username:
-                  type: string
+                userId:
+                  type: integer
                 title:
                   type: string
                 description:

@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rjtoursim.Application;
 import com.rjtoursim.api.model.CreatePostRequest;
 import com.rjtoursim.api.model.UserCredentials;
+import com.rjtoursim.repository.UserRepository;
+
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,6 +34,9 @@ public class CreatePostTest {
   @Autowired
   private ObjectMapper objectMapper;
 
+	@Autowired
+	private UserRepository userRepository;
+
 	@BeforeEach
 	public void setup() throws Exception {
 		// Setup code to create a user that can be used for creating posts
@@ -49,7 +54,7 @@ public class CreatePostTest {
 	@Test
 	public void testCreatePost() throws Exception {
 		CreatePostRequest request = new CreatePostRequest();
-		request.setUsername("testuser");
+		request.setUserId(userRepository.findByUsername("testuser").orElse(null).getId().intValue());
 		request.setTitle("Test Post");
 		request.setDescription("This is a test post.");
 		request.setAddress("123 Test Street");
