@@ -8,7 +8,6 @@ import com.rjtoursim.Application;
 import com.rjtoursim.api.model.CreatePostRequest;
 import com.rjtoursim.api.model.UserCredentials;
 import com.rjtoursim.repository.UserRepository;
-
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,36 +33,43 @@ public class CreatePostTest {
   @Autowired
   private ObjectMapper objectMapper;
 
-	@Autowired
-	private UserRepository userRepository;
+  @Autowired
+  private UserRepository userRepository;
 
-	@BeforeEach
-	public void setup() throws Exception {
-		// Setup code to create a user that can be used for creating posts
-		UserCredentials request = new UserCredentials();
-		request.setUsername("testuser");
-		request.setHashedPassword("password123");
+  /**
+   * Set up a test user before each test case. 
+   * This ensures that we have a valid user to associate with the post creation requests.
 
-		String requestBody = objectMapper.writeValueAsString(request);
-				mockMvc.perform(post("/v1/account/create-user")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(requestBody))
-						.andExpect(status().isCreated());
-	}
+   * @throws Exception if there is an error during user creation
+   */
+  @BeforeEach
+  public void setup() throws Exception {
+    if (!userRepository.findByUsername("testuser").isPresent()) {
+      UserCredentials request = new UserCredentials();
+      request.setUsername("testuser");
+      request.setHashedPassword("password123");
 
-	@Test
-	public void testCreatePost() throws Exception {
-		CreatePostRequest request = new CreatePostRequest();
-		request.setUserId(userRepository.findByUsername("testuser").orElse(null).getId().intValue());
-		request.setTitle("Test Post");
-		request.setDescription("This is a test post.");
-		request.setAddress("123 Test Street");
-		request.setDatePosted(java.time.OffsetDateTime.parse("2023-01-01T00:00:00Z"));
+      String requestBody = objectMapper.writeValueAsString(request);
+      mockMvc.perform(post("/v1/account/create-user")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+            .andExpect(status().isCreated());
+    }
+  }
 
-		String requestBody = objectMapper.writeValueAsString(request);
-				mockMvc.perform(post("/v1/content/create-post")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(requestBody))
-						.andExpect(status().isCreated());
-	}
+  @Test
+  public void testCreatePost() throws Exception {
+    CreatePostRequest request = new CreatePostRequest();
+    request.setUserId(userRepository.findByUsername("testuser").orElse(null).getId().intValue());
+    request.setTitle("Test Post");
+    request.setDescription("This is a test post.");
+    request.setAddress("123 Test Street");
+    request.setDatePosted(java.time.OffsetDateTime.parse("2023-01-01T00:00:00Z"));
+
+    String requestBody = objectMapper.writeValueAsString(request);
+    mockMvc.perform(post("/v1/content/create-post")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(requestBody))
+            .andExpect(status().isCreated());
+  }
 }

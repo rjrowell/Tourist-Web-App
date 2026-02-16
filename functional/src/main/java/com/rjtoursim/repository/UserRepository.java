@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
   /**
   * Find a user by username.
   *
@@ -19,4 +20,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
   * @return an Optional containing the user if found, otherwise empty
   */
   Optional<User> findByUsername(String username);
+
+  /**
+   * Find a user by ID.
+   *
+   * @param id the ID of the user to search for
+   * @return an Optional containing the user if found, otherwise empty
+   */
+  Optional<User> findById(Long id);
 }

@@ -1,7 +1,10 @@
 package com.rjtoursim.api.controller;
 
+import com.rjtoursim.api.model.CreatePostRequest;
 import com.rjtoursim.api.model.UserCredentials;
+import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
+import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +21,9 @@ public class V1ApiController implements V1Api {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private PostRepository postRepository;
 
   @Override
   public ResponseEntity<Void> createUser(UserCredentials createUserRequest) {
@@ -51,5 +57,28 @@ public class V1ApiController implements V1Api {
     }
 
     return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<Void> createPost(CreatePostRequest createPostRequest) {
+    User user = userRepository.findById(createPostRequest.getUserId().longValue()).orElse(null);
+    //Check we find the user, if not return a 400 Bad Request status code. 
+    // If the user already has a post with the same title, return a 409 Conflict status code
+    if (user == null) {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    } else if (postRepository.existsByUserAndTitle(user, createPostRequest.getTitle())) {
+      return new ResponseEntity<>(HttpStatus.CONFLICT);
+    } 
+
+    Post newPost = new Post(
+        user, 
+        createPostRequest.getTitle(), 
+        createPostRequest.getDescription(), 
+        createPostRequest.getAddress(), 
+        createPostRequest.getDatePosted().toLocalDateTime()
+      );
+    
+    postRepository.save(newPost);
+    return new ResponseEntity<>(HttpStatus.CREATED);
   }
 }
