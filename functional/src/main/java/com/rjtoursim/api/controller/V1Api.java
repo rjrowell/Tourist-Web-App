@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-17T14:25:46.360719Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-17T19:45:57.892850Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -141,6 +141,39 @@ public interface V1Api {
 
     // Override this method
     default  ResponseEntity<Void> createUser(UserCredentials userCredentials) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * DELETE /v1/content/delete-post/{postId} : Delete a post with a given post ID.
+     *
+     * @param postId  (required)
+     * @return OK - Post deleted successfully (status code 200)
+     *         or Not Found - Post with the given ID does not exist (status code 404)
+     */
+    @Operation(
+        operationId = "deletePost",
+        summary = "Delete a post with a given post ID.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK - Post deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Not Found - Post with the given ID does not exist")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.DELETE,
+        value = "/v1/content/delete-post/{postId}"
+    )
+    
+    default ResponseEntity<Void> _deletePost(
+        @Parameter(name = "postId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("postId") Integer postId
+    ) {
+        return deletePost(postId);
+    }
+
+    // Override this method
+    default  ResponseEntity<Void> deletePost(Integer postId) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  * CreatePostRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-17T14:25:46.360719Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-17T19:45:57.892850Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class CreatePostRequest {
 
   private @Nullable Integer userId;

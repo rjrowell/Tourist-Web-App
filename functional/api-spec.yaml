@@ -99,6 +99,21 @@ paths:
                           format: date-time
         '404':
           description: Not Found - No posts found
+  '/v1/content/delete-post/{postId}':
+    delete:
+      operationId: delete-post
+      summary: Delete a post with a given post ID.
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK - Post deleted successfully
+        '404':
+          description: Not Found - Post with the given ID does not exist
 
 components:
   schemas:
