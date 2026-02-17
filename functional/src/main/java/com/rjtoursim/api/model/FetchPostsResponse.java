@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.rjtoursim.api.model.Posts;
+import com.rjtoursim.api.model.PostDTO;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,18 +23,18 @@ import jakarta.annotation.Generated;
  * FetchPostsResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-16T17:06:21.109123Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-17T14:25:46.360719Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class FetchPostsResponse {
 
   @Valid
-  private List<@Valid Posts> posts = new ArrayList<>();
+  private List<@Valid PostDTO> posts = new ArrayList<>();
 
-  public FetchPostsResponse posts(List<@Valid Posts> posts) {
+  public FetchPostsResponse posts(List<@Valid PostDTO> posts) {
     this.posts = posts;
     return this;
   }
 
-  public FetchPostsResponse addPostsItem(Posts postsItem) {
+  public FetchPostsResponse addPostsItem(PostDTO postsItem) {
     if (this.posts == null) {
       this.posts = new ArrayList<>();
     }
@@ -49,11 +49,11 @@ public class FetchPostsResponse {
   @Valid 
   @Schema(name = "posts", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("posts")
-  public List<@Valid Posts> getPosts() {
+  public List<@Valid PostDTO> getPosts() {
     return posts;
   }
 
-  public void setPosts(List<@Valid Posts> posts) {
+  public void setPosts(List<@Valid PostDTO> posts) {
     this.posts = posts;
   }
 

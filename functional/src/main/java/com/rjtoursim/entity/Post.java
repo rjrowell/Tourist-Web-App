@@ -77,4 +77,38 @@ public class Post {
     this.address = address;
     this.datePosted = datePosted;
   }
+
+  // Getters
+  public Long getId() {
+    return this.id;
+  }
+
+  public User getUser() {
+    return this.user;
+  }
+
+  public String getTitle() {
+    return this.title;
+  }
+
+  public String getDescription() {
+    return this.description;
+  }
+
+  public String getAddress() {
+    return this.address;
+  }
+
+  public LocalDateTime getDatePosted() {
+    return this.datePosted;
+  }
+
+  public List<Like> getLikes() {
+    return this.likes;
+  }
+
+  public List<Like> getComments() {
+    return this.comments;
+  }
+
 }

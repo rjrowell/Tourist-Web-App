@@ -3,7 +3,7 @@ package com.rjtourism;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rjtoursim.Application;
 import com.rjtoursim.api.model.FetchPostsResponse;
-import com.rjtoursim.api.model.Posts;
+import com.rjtoursim.api.model.PostDTO;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
 import com.rjtoursim.repository.PostRepository;
@@ -98,7 +98,7 @@ public class FetchPostsTest {
           .getResponse()
           .getContentAsString(), FetchPostsResponse.class);
     
-    List<Posts> posts = response.getPosts();
+    List<PostDTO> posts = response.getPosts();
     assertTrue(response.getPosts().size() == 2, "Expected 2 posts but got " + response.getPosts().size());
     assertTrue(posts.get(0).getTitle().equals("Test Post 1") &&
           posts.get(1).getTitle().equals("Test Post 2"), 

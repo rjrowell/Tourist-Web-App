@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-16T17:06:21.109123Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-17T14:25:46.360719Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -179,7 +179,7 @@ public interface V1Api {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"posts\" : [ { \"address\" : \"address\", \"description\" : \"description\", \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"username\" : \"username\" }, { \"address\" : \"address\", \"description\" : \"description\", \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"username\" : \"username\" } ] }";
+                    String exampleString = "{ \"posts\" : [ { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"username\" : \"username\" }, { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"username\" : \"username\" } ] }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

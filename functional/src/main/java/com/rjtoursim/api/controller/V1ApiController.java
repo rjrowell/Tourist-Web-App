@@ -1,11 +1,14 @@
 package com.rjtoursim.api.controller;
 
 import com.rjtoursim.api.model.CreatePostRequest;
+import com.rjtoursim.api.model.FetchPostsResponse;
+import com.rjtoursim.api.model.PostDTO;
 import com.rjtoursim.api.model.UserCredentials;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
 import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -80,5 +83,27 @@ public class V1ApiController implements V1Api {
     
     postRepository.save(newPost);
     return new ResponseEntity<>(HttpStatus.CREATED);
+  }
+
+  @Override
+  public ResponseEntity<FetchPostsResponse> fetchPosts() {
+    FetchPostsResponse response = new FetchPostsResponse();
+    List<Post> posts = postRepository.findAll();
+
+    if (!posts.isEmpty()) {
+      for (Post post : posts) {
+        PostDTO postItem = new PostDTO();
+        postItem.setId(post.getId().intValue());
+        postItem.setUsername(post.getUser().getUsername());
+        postItem.setTitle(post.getTitle());
+        postItem.setDescription(post.getDescription());
+        postItem.setAddress(post.getAddress());
+        postItem.setDatePosted(post.getDatePosted().atOffset(java.time.ZoneOffset.UTC));
+        response.addPostsItem(postItem);
+      }
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
 }

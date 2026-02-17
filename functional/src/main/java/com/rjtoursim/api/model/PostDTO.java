@@ -18,11 +18,13 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * Posts
+ * PostDTO
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-16T17:06:21.109123Z[Europe/London]", comments = "Generator version: 7.13.0")
-public class Posts {
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-17T14:25:46.360719Z[Europe/London]", comments = "Generator version: 7.13.0")
+public class PostDTO {
+
+  private @Nullable Integer id;
 
   private @Nullable String username;
 
@@ -35,7 +37,27 @@ public class Posts {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private @Nullable OffsetDateTime datePosted;
 
-  public Posts username(String username) {
+  public PostDTO id(Integer id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Get id
+   * @return id
+   */
+  
+  @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("id")
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public PostDTO username(String username) {
     this.username = username;
     return this;
   }
@@ -55,7 +77,7 @@ public class Posts {
     this.username = username;
   }
 
-  public Posts title(String title) {
+  public PostDTO title(String title) {
     this.title = title;
     return this;
   }
@@ -75,7 +97,7 @@ public class Posts {
     this.title = title;
   }
 
-  public Posts description(String description) {
+  public PostDTO description(String description) {
     this.description = description;
     return this;
   }
@@ -95,7 +117,7 @@ public class Posts {
     this.description = description;
   }
 
-  public Posts address(String address) {
+  public PostDTO address(String address) {
     this.address = address;
     return this;
   }
@@ -115,7 +137,7 @@ public class Posts {
     this.address = address;
   }
 
-  public Posts datePosted(OffsetDateTime datePosted) {
+  public PostDTO datePosted(OffsetDateTime datePosted) {
     this.datePosted = datePosted;
     return this;
   }
@@ -143,23 +165,25 @@ public class Posts {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Posts posts = (Posts) o;
-    return Objects.equals(this.username, posts.username) &&
-        Objects.equals(this.title, posts.title) &&
-        Objects.equals(this.description, posts.description) &&
-        Objects.equals(this.address, posts.address) &&
-        Objects.equals(this.datePosted, posts.datePosted);
+    PostDTO postDTO = (PostDTO) o;
+    return Objects.equals(this.id, postDTO.id) &&
+        Objects.equals(this.username, postDTO.username) &&
+        Objects.equals(this.title, postDTO.title) &&
+        Objects.equals(this.description, postDTO.description) &&
+        Objects.equals(this.address, postDTO.address) &&
+        Objects.equals(this.datePosted, postDTO.datePosted);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(username, title, description, address, datePosted);
+    return Objects.hash(id, username, title, description, address, datePosted);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Posts {\n");
+    sb.append("class PostDTO {\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");

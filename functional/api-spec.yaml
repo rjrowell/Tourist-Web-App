@@ -81,9 +81,11 @@ paths:
                   posts:
                     type: array
                     items:
-                      title: Posts
+                      title: PostDTO
                       type: object
-                      properties: 
+                      properties:
+                        id:
+                          type: integer
                         username:
                           type: string
                         title:
