@@ -57,4 +57,9 @@ public class Comment {
     this.text = text;
     this.datePosted = datePosted;
   }
+
+  //Getters
+  public Long getId() {
+    return id;
+  }
 }

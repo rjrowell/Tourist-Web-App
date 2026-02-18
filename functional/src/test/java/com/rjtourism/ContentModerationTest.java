@@ -5,8 +5,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.rjtoursim.Application;
+import com.rjtoursim.entity.Comment;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
+import com.rjtoursim.repository.CommentRepository;
 import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -37,6 +39,9 @@ public class ContentModerationTest {
   
   @Autowired
   private PostRepository postRepository;
+
+  @Autowired
+  private CommentRepository commentRepository;
   
   private boolean setupFlag = false;
 
@@ -55,6 +60,40 @@ public class ContentModerationTest {
 
   @Test
   public void testPostRemoval() throws Exception {
+    Post testPost = createTestPost();
+    mockMvc.perform(delete("/v1/content/delete-post/" + testPost.getId()))
+        .andExpect(status().isOk());
+
+    // Verify that the post has been removed from the database
+    try {
+      assertTrue(postRepository.findById(testPost.getId()).isEmpty());
+    } finally {
+      postRepository.delete(testPost);
+    }
+  }
+
+  @Test
+  public void testCommentRemoval() throws Exception {
+    Post testPost = createTestPost();
+    Comment testComment = new Comment(
+      testPost, 
+      userRepository.findByUsername("testuser").orElseThrow(), 
+      "This is an inappropriate comment.", 
+      LocalDateTime.now()
+    );
+    commentRepository.save(testComment);
+
+    mockMvc.perform(delete("/v1/content/delete-comment/" + testComment.getId()))
+          .andExpect(status().isOk());
+    try {
+      // Verify that the comment has been removed from the database
+      assertTrue(commentRepository.findById(testComment.getId()).isEmpty());
+    } finally {
+      commentRepository.delete(testComment);
+    }
+  }
+
+  public Post createTestPost() {
     Post testPost = new Post(
           userRepository.findByUsername("testuser").orElseThrow(), 
           "Inappropriate Content", "This post contains inappropriate content.", 
@@ -62,11 +101,6 @@ public class ContentModerationTest {
           LocalDateTime.now()
         );
     postRepository.save(testPost);
-    
-    mockMvc.perform(delete("/v1/content/delete-post/" + testPost.getId()))
-        .andExpect(status().isOk());
-
-    // Verify that the post has been removed from the database
-    assertTrue(postRepository.findById(testPost.getId()).isEmpty());
+    return testPost;
   }
 }

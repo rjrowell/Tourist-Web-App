@@ -114,6 +114,21 @@ paths:
           description: OK - Post deleted successfully
         '404':
           description: Not Found - Post with the given ID does not exist
+  '/v1/content/delete-comment/{commentId}':
+    delete:
+      operationId: delete-comment
+      summary: Delete a comment with a given comment ID.
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK - Comment deleted successfully
+        '404':
+          description: Not Found - Comment with the given ID does not exist
 
 components:
   schemas:

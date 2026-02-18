@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-17T19:45:57.892850Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-18T16:09:53.044536Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -141,6 +141,39 @@ public interface V1Api {
 
     // Override this method
     default  ResponseEntity<Void> createUser(UserCredentials userCredentials) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * DELETE /v1/content/delete-comment/{commentId} : Delete a comment with a given comment ID.
+     *
+     * @param commentId  (required)
+     * @return OK - Comment deleted successfully (status code 200)
+     *         or Not Found - Comment with the given ID does not exist (status code 404)
+     */
+    @Operation(
+        operationId = "deleteComment",
+        summary = "Delete a comment with a given comment ID.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK - Comment deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Not Found - Comment with the given ID does not exist")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.DELETE,
+        value = "/v1/content/delete-comment/{commentId}"
+    )
+    
+    default ResponseEntity<Void> _deleteComment(
+        @Parameter(name = "commentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("commentId") Integer commentId
+    ) {
+        return deleteComment(commentId);
+    }
+
+    // Override this method
+    default  ResponseEntity<Void> deleteComment(Integer commentId) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
