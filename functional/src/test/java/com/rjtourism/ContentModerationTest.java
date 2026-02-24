@@ -76,10 +76,10 @@ public class ContentModerationTest {
   public void testCommentRemoval() throws Exception {
     Post testPost = createTestPost();
     Comment testComment = new Comment(
-      testPost, 
-      userRepository.findByUsername("testuser").orElseThrow(), 
-      "This is an inappropriate comment.", 
-      LocalDateTime.now()
+        testPost, 
+        userRepository.findByUsername("testuser").orElseThrow(), 
+        "This is an inappropriate comment.", 
+        LocalDateTime.now()
     );
     commentRepository.save(testComment);
 
@@ -93,6 +93,11 @@ public class ContentModerationTest {
     }
   }
 
+  /**
+   * Helper method to create a test post with inappropriate content for testing purposes.
+
+   * @return the created Post object
+   */
   public Post createTestPost() {
     Post testPost = new Post(
           userRepository.findByUsername("testuser").orElseThrow(), 
