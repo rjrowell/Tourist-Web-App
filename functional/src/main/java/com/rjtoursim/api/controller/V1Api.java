@@ -6,7 +6,10 @@
 package com.rjtoursim.api.controller;
 
 import com.rjtoursim.api.model.CreatePostRequest;
+import com.rjtoursim.api.model.FetchLikesResponse;
 import com.rjtoursim.api.model.FetchPostsResponse;
+import com.rjtoursim.api.model.GetLikeResponse;
+import com.rjtoursim.api.model.LikeRequest;
 import com.rjtoursim.api.model.UserCredentials;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,7 +38,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-18T16:09:53.044536Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-24T14:24:58.540860Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -43,6 +46,40 @@ public interface V1Api {
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
     }
+
+    /**
+     * POST /v1/content/add-like : Add a like to a post with a given user ID and post ID.
+     *
+     * @param likeRequest  (optional)
+     * @return OK - Like added successfully (status code 200)
+     *         or Not Found - User or post with the given ID does not exist (status code 404)
+     */
+    @Operation(
+        operationId = "addLike",
+        summary = "Add a like to a post with a given user ID and post ID.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK - Like added successfully"),
+            @ApiResponse(responseCode = "404", description = "Not Found - User or post with the given ID does not exist")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.POST,
+        value = "/v1/content/add-like",
+        consumes = { "application/json" }
+    )
+    
+    default ResponseEntity<Void> _addLike(
+        @Parameter(name = "LikeRequest", description = "") @Valid @RequestBody(required = false) LikeRequest likeRequest
+    ) {
+        return addLike(likeRequest);
+    }
+
+    // Override this method
+    default  ResponseEntity<Void> addLike(LikeRequest likeRequest) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
 
     /**
      * POST /v1/authentication/authenticate-user : For a given username and password, authenticate them.
@@ -213,6 +250,51 @@ public interface V1Api {
 
 
     /**
+     * GET /v1/content/fetch-likes/{postId} : Fetch the number of likes for a given post ID.
+     *
+     * @param postId  (required)
+     * @return OK - Number of likes retrieved successfully (status code 200)
+     *         or Not Found - Post with the given ID does not exist (status code 404)
+     */
+    @Operation(
+        operationId = "fetchLikes",
+        summary = "Fetch the number of likes for a given post ID.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK - Number of likes retrieved successfully", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = FetchLikesResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found - Post with the given ID does not exist")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/v1/content/fetch-likes/{postId}",
+        produces = { "application/json" }
+    )
+    
+    default ResponseEntity<FetchLikesResponse> _fetchLikes(
+        @Parameter(name = "postId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("postId") Integer postId
+    ) {
+        return fetchLikes(postId);
+    }
+
+    // Override this method
+    default  ResponseEntity<FetchLikesResponse> fetchLikes(Integer postId) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"likeCount\" : 0 }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
      * GET /v1/content/fetch-posts : Fetch all posts.
      *
      * @return OK (status code 200)
@@ -246,6 +328,52 @@ public interface V1Api {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"posts\" : [ { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"username\" : \"username\" }, { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"username\" : \"username\" } ] }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /v1/content/get-like : Get the like status for a given user ID and post ID.
+     *
+     * @param likeRequest  (optional)
+     * @return OK - Like status retrieved successfully (status code 200)
+     *         or Not Found - User or post with the given ID does not exist (status code 404)
+     */
+    @Operation(
+        operationId = "getLike",
+        summary = "Get the like status for a given user ID and post ID.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK - Like status retrieved successfully", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = GetLikeResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found - User or post with the given ID does not exist")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/v1/content/get-like",
+        produces = { "application/json" },
+        consumes = { "application/json" }
+    )
+    
+    default ResponseEntity<GetLikeResponse> _getLike(
+        @Parameter(name = "LikeRequest", description = "") @Valid @RequestBody(required = false) LikeRequest likeRequest
+    ) {
+        return getLike(likeRequest);
+    }
+
+    // Override this method
+    default  ResponseEntity<GetLikeResponse> getLike(LikeRequest likeRequest) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"likeStatus\" : true }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

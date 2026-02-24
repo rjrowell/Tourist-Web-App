@@ -52,7 +52,7 @@ public class ContentModerationTest {
   @BeforeEach
   public void setup() {
     if (!setupFlag) {
-      User user = new User("testuser", "testPassword123");
+      User user = new User("testuser", "testPassword123", false);
       userRepository.save(user);
       setupFlag = true;
     }

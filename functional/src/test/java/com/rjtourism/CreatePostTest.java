@@ -48,6 +48,7 @@ public class CreatePostTest {
       UserCredentials request = new UserCredentials();
       request.setUsername("testuser");
       request.setHashedPassword("password123");
+      request.setIsAdmin(false);
 
       String requestBody = objectMapper.writeValueAsString(request);
       mockMvc.perform(post("/v1/account/create-user")

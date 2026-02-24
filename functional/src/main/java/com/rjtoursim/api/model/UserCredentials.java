@@ -19,12 +19,14 @@ import jakarta.annotation.Generated;
  * UserCredentials
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-18T16:09:53.044536Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-24T14:24:58.540860Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class UserCredentials {
 
   private String hashedPassword;
 
   private String username;
+
+  private Boolean isAdmin;
 
   public UserCredentials() {
     super();
@@ -33,9 +35,10 @@ public class UserCredentials {
   /**
    * Constructor with only required parameters
    */
-  public UserCredentials(String hashedPassword, String username) {
+  public UserCredentials(String hashedPassword, String username, Boolean isAdmin) {
     this.hashedPassword = hashedPassword;
     this.username = username;
+    this.isAdmin = isAdmin;
   }
 
   public UserCredentials hashedPassword(String hashedPassword) {
@@ -78,6 +81,26 @@ public class UserCredentials {
     this.username = username;
   }
 
+  public UserCredentials isAdmin(Boolean isAdmin) {
+    this.isAdmin = isAdmin;
+    return this;
+  }
+
+  /**
+   * Get isAdmin
+   * @return isAdmin
+   */
+  @NotNull 
+  @Schema(name = "isAdmin", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("isAdmin")
+  public Boolean getIsAdmin() {
+    return isAdmin;
+  }
+
+  public void setIsAdmin(Boolean isAdmin) {
+    this.isAdmin = isAdmin;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -88,12 +111,13 @@ public class UserCredentials {
     }
     UserCredentials userCredentials = (UserCredentials) o;
     return Objects.equals(this.hashedPassword, userCredentials.hashedPassword) &&
-        Objects.equals(this.username, userCredentials.username);
+        Objects.equals(this.username, userCredentials.username) &&
+        Objects.equals(this.isAdmin, userCredentials.isAdmin);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(hashedPassword, username);
+    return Objects.hash(hashedPassword, username, isAdmin);
   }
 
   @Override
@@ -102,6 +126,7 @@ public class UserCredentials {
     sb.append("class UserCredentials {\n");
     sb.append("    hashedPassword: ").append(toIndentedString(hashedPassword)).append("\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
+    sb.append("    isAdmin: ").append(toIndentedString(isAdmin)).append("\n");
     sb.append("}");
     return sb.toString();
   }

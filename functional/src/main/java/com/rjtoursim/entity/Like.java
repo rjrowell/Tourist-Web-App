@@ -32,6 +32,9 @@ public class Like {
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
 
+  /**
+   * Whether this is a like (true) or an unlike (false).
+   */
   @Column(name = "like_status", nullable = false)
   private boolean likeStatus;
 
@@ -50,6 +53,14 @@ public class Like {
   public Like(Post post, User user, boolean likeStatus) {
     this.post = post;
     this.user = user;
+    this.likeStatus = likeStatus;
+  }
+
+  public boolean getStatus() {
+    return likeStatus;
+  }
+
+  public void setStatus(boolean likeStatus) {
     this.likeStatus = likeStatus;
   }
 }

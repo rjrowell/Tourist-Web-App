@@ -129,6 +129,65 @@ paths:
           description: OK - Comment deleted successfully
         '404':
           description: Not Found - Comment with the given ID does not exist
+  '/v1/content/add-like':
+    post:
+      operationId: add-like
+      summary: Add a like to a post with a given user ID and post ID.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LikeRequest'
+      responses:
+        '200':
+          description: OK - Like added successfully
+        '404':
+          description: Not Found - User or post with the given ID does not exist
+  '/v1/content/get-like':
+    get:
+      operationId: get-like
+      summary: Get the like status for a given user ID and post ID.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LikeRequest'
+      responses:
+        '200':
+          description: OK - Like status retrieved successfully
+          content:
+            application/json:
+              schema:
+                title: GetLikeResponse
+                type: object
+                properties:
+                  likeStatus:
+                    type: boolean
+        '404':
+          description: Not Found - User or post with the given ID does not exist
+  '/v1/content/fetch-likes/{postId}':
+    get:
+      operationId: fetch-likes
+      summary: Fetch the number of likes for a given post ID.
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK - Number of likes retrieved successfully
+          content:
+            application/json:
+              schema:
+                title: FetchLikesResponse
+                type: object
+                properties:
+                  likeCount:
+                    type: integer
+        '404':
+          description: Not Found - Post with the given ID does not exist
 
 components:
   schemas:
@@ -140,9 +199,25 @@ components:
           type: string
         username: 
           type: string
+        isAdmin:
+          type: boolean
       required:
         - username
         - hashedPassword
+        - isAdmin
+    LikeRequest:
+      title: LikeRequest
+      type: object
+      properties:
+        userId:
+          type: integer
+        postId:
+          type: integer
+        status:
+          type: boolean
+      required:
+        - userId
+        - postId
   responses:
     AuthResponse:
       description: OK

@@ -1,5 +1,9 @@
 package com.rjtourism;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rjtoursim.Application;
 import com.rjtoursim.api.model.FetchPostsResponse;
@@ -9,13 +13,7 @@ import com.rjtoursim.entity.User;
 import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
 import jakarta.transaction.Transactional;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +56,7 @@ public class FetchPostsTest {
     if (!setupFlag) {
       // Setup code to create a user and some posts that can be used for fetching posts
       // create a user
-      User testUser = new User("testuser", "password123");
+      User testUser = new User("testuser", "password123", false);
       userRepository.save(testUser);
 
       java.time.LocalDateTime datePosted = java.time.Instant.parse("2023-01-01T00:00:00Z")
@@ -99,8 +97,12 @@ public class FetchPostsTest {
           .getContentAsString(), FetchPostsResponse.class);
     
     List<PostDTO> posts = response.getPosts();
-    assertTrue(response.getPosts().size() == 2, "Expected 2 posts but got " + response.getPosts().size());
-    assertTrue(posts.get(0).getTitle().equals("Test Post 1") &&
+
+    assertTrue(response.getPosts().size() == 2, "Expected 2 posts but got " 
+        + response.getPosts().size());
+
+    assertTrue(posts.get(0).getTitle().equals("Test Post 1") 
+          &&
           posts.get(1).getTitle().equals("Test Post 2"), 
           "Post titles do not match expected values");
   }

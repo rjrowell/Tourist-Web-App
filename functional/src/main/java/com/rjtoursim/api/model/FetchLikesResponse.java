@@ -4,10 +4,6 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.rjtoursim.api.model.PostDTO;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.springframework.lang.Nullable;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -20,41 +16,32 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * FetchPostsResponse
+ * FetchLikesResponse
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-24T14:24:58.540860Z[Europe/London]", comments = "Generator version: 7.13.0")
-public class FetchPostsResponse {
+public class FetchLikesResponse {
 
-  @Valid
-  private List<@Valid PostDTO> posts = new ArrayList<>();
+  private @Nullable Integer likeCount;
 
-  public FetchPostsResponse posts(List<@Valid PostDTO> posts) {
-    this.posts = posts;
-    return this;
-  }
-
-  public FetchPostsResponse addPostsItem(PostDTO postsItem) {
-    if (this.posts == null) {
-      this.posts = new ArrayList<>();
-    }
-    this.posts.add(postsItem);
+  public FetchLikesResponse likeCount(Integer likeCount) {
+    this.likeCount = likeCount;
     return this;
   }
 
   /**
-   * Get posts
-   * @return posts
+   * Get likeCount
+   * @return likeCount
    */
-  @Valid 
-  @Schema(name = "posts", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("posts")
-  public List<@Valid PostDTO> getPosts() {
-    return posts;
+  
+  @Schema(name = "likeCount", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("likeCount")
+  public Integer getLikeCount() {
+    return likeCount;
   }
 
-  public void setPosts(List<@Valid PostDTO> posts) {
-    this.posts = posts;
+  public void setLikeCount(Integer likeCount) {
+    this.likeCount = likeCount;
   }
 
   @Override
@@ -65,20 +52,20 @@ public class FetchPostsResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    FetchPostsResponse fetchPostsResponse = (FetchPostsResponse) o;
-    return Objects.equals(this.posts, fetchPostsResponse.posts);
+    FetchLikesResponse fetchLikesResponse = (FetchLikesResponse) o;
+    return Objects.equals(this.likeCount, fetchLikesResponse.likeCount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(posts);
+    return Objects.hash(likeCount);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class FetchPostsResponse {\n");
-    sb.append("    posts: ").append(toIndentedString(posts)).append("\n");
+    sb.append("class FetchLikesResponse {\n");
+    sb.append("    likeCount: ").append(toIndentedString(likeCount)).append("\n");
     sb.append("}");
     return sb.toString();
   }

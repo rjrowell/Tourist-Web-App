@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  * PostDTO
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-18T16:09:53.044536Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-24T14:24:58.540860Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class PostDTO {
 
   private @Nullable Integer id;

@@ -44,6 +44,7 @@ public class CreateUserTest {
     UserCredentials request = new UserCredentials();
     request.setUsername("testuser");
     request.setHashedPassword("password123");
+    request.setIsAdmin(false);
 
     String requestBody = objectMapper.writeValueAsString(request);
     mockMvc.perform(post("/v1/account/create-user")
@@ -58,11 +59,12 @@ public class CreateUserTest {
 
   @Test
   public void createUserWithExistingUsername() throws Exception {
-    userRepository.save(new User("existingUser", "existingPassword"));
+    userRepository.save(new User("existingUser", "existingPassword", false));
 
     UserCredentials request = new UserCredentials();
     request.setUsername("existingUser");
     request.setHashedPassword("existingPassword");
+    request.setIsAdmin(false);
 
     try {
       String requestBody = objectMapper.writeValueAsString(request);

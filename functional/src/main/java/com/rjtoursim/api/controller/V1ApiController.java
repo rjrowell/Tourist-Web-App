@@ -1,11 +1,18 @@
 package com.rjtoursim.api.controller;
 
 import com.rjtoursim.api.model.CreatePostRequest;
+import com.rjtoursim.api.model.FetchLikesResponse;
 import com.rjtoursim.api.model.FetchPostsResponse;
+import com.rjtoursim.api.model.GetLikeResponse;
+import com.rjtoursim.api.model.LikeRequest;
 import com.rjtoursim.api.model.PostDTO;
 import com.rjtoursim.api.model.UserCredentials;
+import com.rjtoursim.entity.Comment;
+import com.rjtoursim.entity.Like;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
+import com.rjtoursim.repository.CommentRepository;
+import com.rjtoursim.repository.LikeRepository;
 import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
 import java.util.List;
@@ -28,6 +35,12 @@ public class V1ApiController implements V1Api {
   @Autowired
   private PostRepository postRepository;
 
+  @Autowired
+  private CommentRepository commentRepository;
+
+  @Autowired
+  private LikeRepository likeRepository;
+
   @Override
   public ResponseEntity<Void> createUser(UserCredentials createUserRequest) {
 
@@ -36,7 +49,9 @@ public class V1ApiController implements V1Api {
       return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
-    User user = new User(createUserRequest.getUsername(), createUserRequest.getHashedPassword());
+    User user = new User(createUserRequest.getUsername(),
+        createUserRequest.getHashedPassword(),
+        createUserRequest.getIsAdmin());
     userRepository.save(user);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
@@ -104,6 +119,89 @@ public class V1ApiController implements V1Api {
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    return new ResponseEntity<>(response, HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<Void> deletePost(Integer postId) {
+    Post post = postRepository.findById(postId.longValue()).orElse(null);
+    if (post == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    postRepository.delete(post);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<Void> deleteComment(Integer commentId) {
+    Comment comment = commentRepository.findById(commentId.longValue()).orElse(null);
+    if (comment == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    commentRepository.delete(comment);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<Void> addLike(LikeRequest likeRequest) {
+    User user = userRepository.findById(likeRequest.getUserId().longValue()).orElse(null);
+    Post post = postRepository.findById(likeRequest.getPostId().longValue()).orElse(null);
+
+    if (user == null || post == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    Like checkLike = likeRepository.findByUserIdAndPostId(user.getId(), post.getId());
+    if (checkLike != null) {
+      checkLike.setStatus(likeRequest.getStatus());
+      likeRepository.save(checkLike);
+    } else {
+      Like newLike = new Like(post, user, likeRequest.getStatus());
+      likeRepository.save(newLike);
+    }
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<GetLikeResponse> getLike(LikeRequest likeRequest) {
+    User user = userRepository.findById(likeRequest.getUserId().longValue()).orElse(null);
+    Post post = postRepository.findById(likeRequest.getPostId().longValue()).orElse(null);
+
+    if (user == null || post == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    Like like = likeRepository.findByUserIdAndPostId(user.getId(), post.getId());
+    if (like == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    GetLikeResponse response = new GetLikeResponse();
+    response.setLikeStatus(like.getStatus());
+    return new ResponseEntity<>(response, HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<FetchLikesResponse> fetchLikes(Integer postId) {
+    Post post = postRepository.findById(postId.longValue()).orElse(null);
+    if (post == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    List<Like> likes = likeRepository.findByPostId(post.getId());
+    int likeCount = 0;
+    for (Like like : likes) {
+      if (like.getStatus()) {
+        likeCount++;
+      } else {
+        likeCount--;
+      }
+    }
+
+    FetchLikesResponse response = new FetchLikesResponse();
+    response.setLikeCount(likeCount);
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 }

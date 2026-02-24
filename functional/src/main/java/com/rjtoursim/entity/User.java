@@ -29,6 +29,9 @@ public class User {
   @Column(name = "password", nullable = false, length = 255)
   private String password;
 
+  @Column(name = "is_admin", nullable = false)
+  private boolean isAdmin;
+
   //One user can have many posts
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Post> posts = new ArrayList<>();
@@ -41,10 +44,13 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Like> comments = new ArrayList<>();
 
-  //Default constructor
-  public User(String username, String password) {
+  /**
+  * Default constructor.
+  */
+  public User(String username, String password, boolean isAdmin) {
     this.username = username;
     this.password = password;
+    this.isAdmin = isAdmin;
   }
 
   //Getters and setters

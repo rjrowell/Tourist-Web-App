@@ -45,6 +45,7 @@ public class AuthenticateUserTest {
   public void setup() {
     request.setUsername("testuser");
     request.setHashedPassword("password123");
+    request.setIsAdmin(false);
 
     // Only create the user if it doesn't already exist in the database
     if (userRepository.findByUsername("testuser").isEmpty()) {
