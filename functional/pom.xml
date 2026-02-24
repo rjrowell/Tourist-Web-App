@@ -37,29 +37,6 @@
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>
-            <!--<plugin>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>7.13.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/api-spec.yaml</inputSpec>
-                            <generatorName>spring</generatorName>
-                            <configurationFile>${project.basedir}/codegen-config.yaml</configurationFile>
-                            <typeMappings>
-                                <typeMapping>char[]=char[]</typeMapping>
-                            </typeMappings>
-                            <languageSpecificPrimitives>
-                                <languageSpecificPrimitive>char[]</languageSpecificPrimitive>
-                            </languageSpecificPrimitives>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>

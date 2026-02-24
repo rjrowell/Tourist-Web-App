@@ -5,6 +5,7 @@
  */
 package com.rjtoursim.api.controller;
 
+import com.rjtoursim.api.model.CalculateAchievementResponse;
 import com.rjtoursim.api.model.CreatePostRequest;
 import com.rjtoursim.api.model.FetchLikesResponse;
 import com.rjtoursim.api.model.FetchPostsResponse;
@@ -38,7 +39,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-24T14:24:58.540860Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-24T18:13:32.608963Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -112,6 +113,51 @@ public interface V1Api {
 
     // Override this method
     default  ResponseEntity<Void> authenticateUser(UserCredentials userCredentials) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /v1/account/calculate-achievement/{userId} : Calculate the achievements for a given user ID.
+     *
+     * @param userId  (required)
+     * @return OK (status code 200)
+     *         or Not Found - User with the given ID does not exist (status code 404)
+     */
+    @Operation(
+        operationId = "calculateAchievement",
+        summary = "Calculate the achievements for a given user ID.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CalculateAchievementResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found - User with the given ID does not exist")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/v1/account/calculate-achievement/{userId}",
+        produces = { "application/json" }
+    )
+    
+    default ResponseEntity<CalculateAchievementResponse> _calculateAchievement(
+        @Parameter(name = "userId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("userId") Integer userId
+    ) {
+        return calculateAchievement(userId);
+    }
+
+    // Override this method
+    default  ResponseEntity<CalculateAchievementResponse> calculateAchievement(Integer userId) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"5LikesAchievement\" : true }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

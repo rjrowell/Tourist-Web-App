@@ -40,6 +40,29 @@ paths:
           description: Created
         '409':
           description: Conflict - Username already exists
+  '/v1/account/calculate-achievement/{userId}':
+    get:
+      operationId: calculate-achievement
+      summary: Calculate the achievements for a given user ID.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: CalculateAchievementResponse
+                type: object
+                properties:
+                  5LikesAchievement:
+                    type: boolean
+        '404':
+          description: Not Found - User with the given ID does not exist
   '/v1/content/create-post':
     post:
       operationId: create-post

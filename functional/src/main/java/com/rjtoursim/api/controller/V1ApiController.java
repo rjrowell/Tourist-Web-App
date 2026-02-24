@@ -1,5 +1,6 @@
 package com.rjtoursim.api.controller;
 
+import com.rjtoursim.api.model.CalculateAchievementResponse;
 import com.rjtoursim.api.model.CreatePostRequest;
 import com.rjtoursim.api.model.FetchLikesResponse;
 import com.rjtoursim.api.model.FetchPostsResponse;
@@ -15,6 +16,7 @@ import com.rjtoursim.repository.CommentRepository;
 import com.rjtoursim.repository.LikeRepository;
 import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
+import com.rjtoursim.utils.AcheivementCalculator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +43,9 @@ public class V1ApiController implements V1Api {
   @Autowired
   private LikeRepository likeRepository;
 
+  @Autowired
+  private AcheivementCalculator achievementCalculator;
+
   @Override
   public ResponseEntity<Void> createUser(UserCredentials createUserRequest) {
 
@@ -54,6 +59,23 @@ public class V1ApiController implements V1Api {
         createUserRequest.getIsAdmin());
     userRepository.save(user);
     return new ResponseEntity<>(HttpStatus.CREATED);
+  }
+
+  @Override
+  public ResponseEntity<CalculateAchievementResponse> calculateAchievement(Integer userId) {
+
+    User user = userRepository.findById(userId.longValue()).orElse(null);
+    if (user == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    CalculateAchievementResponse response = new CalculateAchievementResponse();
+
+    if (achievementCalculator.calculate5LikesAcheivement(userId)) {
+      response.set5likesAchievement(true);
+    }
+
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
   @Override
