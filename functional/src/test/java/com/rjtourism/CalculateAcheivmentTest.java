@@ -99,6 +99,7 @@ public class CalculateAcheivmentTest {
         CalculateAchievementResponse.class
     );
 
-    assertTrue(response.get5likesAchievement(), "5 Likes achievement should be awarded when user has 5 or more likes");
+    assertTrue(response.get5likesAchievement(), 
+        "5 Likes achievement should be awarded when user has 5 or more likes");
   }
 }
