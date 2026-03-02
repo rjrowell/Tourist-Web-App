@@ -1,34 +1,60 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Header from './components/Header'
+import ControlBar from './components/ControlBar'
+import PostsList from './components/PostsList'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Sample posts data - replace this with data from your backend
+  const [posts] = useState([
+    {
+      id: 1,
+      title: 'Portchester Castle',
+      description: 'A medieval fortress built within a Roman fort in Portchester. It was a royal residence, a hunting lodge, a prison and a port of embarkation for several campaigns to France',
+      location: 'Church Road, Portchester, PO16 9QW, Hampshire',
+      likes: 125
+    },
+    {
+      id: 2,
+      title: 'Portchester Castle',
+      description: 'A medieval fortress built within a Roman fort in Portchester. It was a royal residence, a hunting lodge, a prison and a port of embarkation for several campaigns to France',
+      location: 'Church Road, Portchester, PO16 9QW, Hampshire',
+      likes: 125
+    },
+    {
+      id: 3,
+      title: 'Portchester Castle',
+      description: 'A medieval fortress built within a Roman fort in Portchester. It was a royal residence, a hunting lodge, a prison and a port of embarkation for several campaigns to France',
+      location: 'Church Road, Portchester, PO16 9QW, Hampshire',
+      likes: 125
+    }
+  ])
+
+  const handleFilter = () => {
+    console.log('Filter clicked')
+    // TODO: Implement filter functionality
+  }
+
+  const handleSort = () => {
+    console.log('Sort clicked')
+    // TODO: Implement sort functionality
+  }
+
+  const handleNewPost = () => {
+    console.log('New Post clicked')
+    // TODO: Implement new post modal/navigation
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app">
+      <Header />
+      <ControlBar 
+        onFilterClick={handleFilter}
+        onSortClick={handleSort}
+        onNewPostClick={handleNewPost}
+      />
+      <PostsList posts={posts} />
+    </div>
   )
 }
 

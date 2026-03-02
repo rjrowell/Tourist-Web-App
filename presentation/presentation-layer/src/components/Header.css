@@ -1,0 +1,48 @@
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-bottom: 2px solid #DE3A3A;
+  background-color: #fff;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-left .logo {
+  position: relative;
+  top: -5px;
+  width: 50px;
+  height: 50px;
+}
+
+.header-left h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 56px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.header-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #DE3A3A;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
