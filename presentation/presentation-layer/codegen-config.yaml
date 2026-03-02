@@ -1,0 +1,16 @@
+generatorName: javascript
+inputSpec: api-spec.yaml
+outputDir: ./src/api
+additionalProperties:
+  # Package info
+  projectName: rjtoursim-api-client
+  moduleName: RJTourismAPI
+  projectVersion: 1.0.0
+  
+  # JavaScript-specific
+  useES6: true
+  usePromises: true
+  
+  # No TypeScript
+  emitModelMethods: true
+  emitJSDoc: true
