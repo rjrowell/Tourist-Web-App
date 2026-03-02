@@ -9,7 +9,7 @@ export default function ControlBar({ onFilterClick, onSortClick, onNewPostClick 
       <button className="btn btn-control" onClick={onSortClick}>
         Sort ▼
       </button>
-      <button className="btn btn-primary" onClick={onNewPostClick}>
+      <button className="btn btn-control" onClick={onNewPostClick}>
         New Post
       </button>
     </div>

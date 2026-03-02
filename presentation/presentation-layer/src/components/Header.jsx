@@ -9,8 +9,8 @@ export default function Header() {
         <h1>Visit Hampshire</h1>
       </div>
       <nav className="header-nav">
-        <button className="btn btn-link">Sign Up</button>
-        <button className="btn btn-link">Login</button>
+        <button className="btn-link">Sign Up</button>
+        <button className="btn-link">Login</button>
       </nav>
     </header>
   )

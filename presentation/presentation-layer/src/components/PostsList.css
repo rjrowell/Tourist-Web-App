@@ -1,6 +1,7 @@
 /* Posts List Styles */
 .posts-list {
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: 1500px;
+  margin: 20px auto;
   padding: 30px 40px;
 }
+
