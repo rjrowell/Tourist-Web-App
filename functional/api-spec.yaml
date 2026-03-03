@@ -59,7 +59,7 @@ paths:
                 title: CalculateAchievementResponse
                 type: object
                 properties:
-                  5LikesAchievement:
+                  FiveLikesAchievement:
                     type: boolean
         '404':
           description: Not Found - User with the given ID does not exist

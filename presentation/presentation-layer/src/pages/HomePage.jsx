@@ -1,40 +1,46 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import ControlBar from '../components/ControlBar'
 import PostsList from '../components/PostsList'
+import ApiController from '../services/ApiController'
+
+const apiController = new ApiController()
 
 function HomePage() {
-  // Sample posts data - replace this with data from your backend
-  const [posts] = useState([
-    {
-      id: 1,
-      title: 'Portchester Castle',
-      description: 'A medieval fortress built within a Roman fort in Portchester. It was a royal residence, a hunting lodge, a prison and a port of embarkation for several campaigns to France',
-      location: 'Church Road, Portchester, PO16 9QW, Hampshire',
-      likes: 125
-    },
-    {
-      id: 2,
-      title: 'Portchester Castle',
-      description: 'A medieval fortress built within a Roman fort in Portchester. It was a royal residence, a hunting lodge, a prison and a port of embarkation for several campaigns to France',
-      location: 'Church Road, Portchester, PO16 9QW, Hampshire',
-      likes: 125
-    },
-    {
-      id: 3,
-      title: 'Portchester Castle',
-      description: 'A medieval fortress built within a Roman fort in Portchester. It was a royal residence, a hunting lodge, a prison and a port of embarkation for several campaigns to France',
-      location: 'Church Road, Portchester, PO16 9QW, Hampshire',
-      likes: 125
-    },
-    {
-      id: 4,
-      title: 'Portchester Castle',
-      description: 'A medieval fortress built within a Roman fort in Portchester. It was a royal residence, a hunting lodge, a prison and a port of embarkation for several campaigns to France',
-      location: 'Church Road, Portchester, PO16 9QW, Hampshire',
-      likes: 125
+  const [posts, setPosts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    loadPosts()
+  }, [])
+
+  const loadPosts = async () => {
+    try {
+      setLoading(true)
+
+      const postFromApi = await apiController.fetchPosts()
+
+      const postArray = await Promise.all(
+        postFromApi.map(async (post) => {
+          const likesData = await apiController.getLikesForPost(post.id)
+          return {
+            id: post.id,
+            description: post.description,
+            address: post.address,
+            likes: likesData
+          }
+        })
+      )
+
+      setPosts(postArray)
+      
+    } catch (err) {
+      setError('Failed to load posts')
+    } finally {
+      setLoading(false)
     }
-  ])
+  }
 
   const handleFilter = () => {
     console.log('Filter clicked')

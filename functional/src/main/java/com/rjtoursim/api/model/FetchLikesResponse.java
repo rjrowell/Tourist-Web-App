@@ -19,7 +19,7 @@ import jakarta.annotation.Generated;
  * FetchLikesResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-24T18:13:32.608963Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-03T13:16:18.488897Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class FetchLikesResponse {
 
   private @Nullable Integer likeCount;

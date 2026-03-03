@@ -72,7 +72,9 @@ public class V1ApiController implements V1Api {
     CalculateAchievementResponse response = new CalculateAchievementResponse();
 
     if (achievementCalculator.calculate5LikesAcheivement(userId)) {
-      response.set5likesAchievement(true);
+      response.setFiveLikesAchievement(true);
+    } else {
+      response.setFiveLikesAchievement(false);
     }
 
     return new ResponseEntity<>(response, HttpStatus.OK);
@@ -138,8 +140,6 @@ public class V1ApiController implements V1Api {
         postItem.setDatePosted(post.getDatePosted().atOffset(java.time.ZoneOffset.UTC));
         response.addPostsItem(postItem);
       }
-    } else {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     return new ResponseEntity<>(response, HttpStatus.OK);
   }

@@ -4,6 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**_5likesAchievement** | **Boolean** |  | [optional] 
+**fiveLikesAchievement** | **Boolean** |  | [optional] 
 
 

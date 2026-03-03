@@ -1,6 +1,5 @@
 .babelrc
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 docs/AuthResponse.md
@@ -28,13 +27,3 @@ src/model/GetLikeResponse.js
 src/model/LikeRequest.js
 src/model/PostDTO.js
 src/model/UserCredentials.js
-test/api/DefaultApi.spec.js
-test/model/AuthResponse.spec.js
-test/model/CalculateAchievementResponse.spec.js
-test/model/CreatePostRequest.spec.js
-test/model/FetchLikesResponse.spec.js
-test/model/FetchPostsResponse.spec.js
-test/model/GetLikeResponse.spec.js
-test/model/LikeRequest.spec.js
-test/model/PostDTO.spec.js
-test/model/UserCredentials.spec.js

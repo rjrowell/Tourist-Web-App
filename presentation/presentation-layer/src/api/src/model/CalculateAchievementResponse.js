@@ -47,8 +47,8 @@ class CalculateAchievementResponse {
         if (data) {
             obj = obj || new CalculateAchievementResponse();
 
-            if (data.hasOwnProperty('5LikesAchievement')) {
-                obj['5LikesAchievement'] = ApiClient.convertToType(data['5LikesAchievement'], 'Boolean');
+            if (data.hasOwnProperty('FiveLikesAchievement')) {
+                obj['FiveLikesAchievement'] = ApiClient.convertToType(data['FiveLikesAchievement'], 'Boolean');
             }
         }
         return obj;
@@ -67,15 +67,15 @@ class CalculateAchievementResponse {
 /**
      * @return {Boolean}
      */
-    get5likesAchievement() {
-        return this.5LikesAchievement;
+    getFiveLikesAchievement() {
+        return this.FiveLikesAchievement;
     }
 
     /**
-     * @param {Boolean} _5likesAchievement
+     * @param {Boolean} fiveLikesAchievement
      */
-    set5likesAchievement(_5likesAchievement) {
-        this['5LikesAchievement'] = _5likesAchievement;
+    setFiveLikesAchievement(fiveLikesAchievement) {
+        this['FiveLikesAchievement'] = fiveLikesAchievement;
     }
 
 }
@@ -83,9 +83,9 @@ class CalculateAchievementResponse {
 
 
 /**
- * @member {Boolean} 5LikesAchievement
+ * @member {Boolean} FiveLikesAchievement
  */
-CalculateAchievementResponse.prototype['5LikesAchievement'] = undefined;
+CalculateAchievementResponse.prototype['FiveLikesAchievement'] = undefined;
 
 
 
