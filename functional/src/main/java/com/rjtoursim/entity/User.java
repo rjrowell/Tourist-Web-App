@@ -45,12 +45,19 @@ public class User {
   private List<Like> comments = new ArrayList<>();
 
   /**
-  * Default constructor.
+  * Conveniance constructor.
   */
   public User(String username, String password, boolean isAdmin) {
     this.username = username;
     this.password = password;
     this.isAdmin = isAdmin;
+  }
+
+  /**
+   * Default constructor.
+   */
+  public User() {
+
   }
 
   //Getters and setters

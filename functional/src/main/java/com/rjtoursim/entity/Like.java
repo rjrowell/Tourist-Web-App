@@ -56,6 +56,13 @@ public class Like {
     this.likeStatus = likeStatus;
   }
 
+  /**
+   * Default Constructor.
+   */
+  public Like() {
+
+  }
+
   public boolean getStatus() {
     return likeStatus;
   }

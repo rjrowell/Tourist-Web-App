@@ -58,6 +58,13 @@ public class Comment {
     this.datePosted = datePosted;
   }
 
+  /**
+   * Default Constructor.
+   */
+  public Comment() {
+
+  }
+
   //Getters
   public Long getId() {
     return id;

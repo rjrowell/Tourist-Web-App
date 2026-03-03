@@ -78,6 +78,11 @@ public class Post {
     this.datePosted = datePosted;
   }
 
+  //default constructer
+  public Post() {
+
+  }
+
   // Getters
   public Long getId() {
     return this.id;

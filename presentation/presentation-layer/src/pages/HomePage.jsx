@@ -26,8 +26,9 @@ function HomePage() {
           const likesData = await apiController.getLikesForPost(post.id)
           return {
             id: post.id,
+            title: post.title,
             description: post.description,
-            address: post.address,
+            location: post.address,
             likes: likesData
           }
         })

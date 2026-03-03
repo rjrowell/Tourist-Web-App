@@ -19,6 +19,7 @@ export default class ApiController {
   async fetchPosts() { 
     try {
       const response = await this.api.fetchPosts();
+      console.log(response)
       return response.posts || [];  // Return empty array if no posts
     } catch (error) {
       console.error('Failed to fetch posts:', error);
