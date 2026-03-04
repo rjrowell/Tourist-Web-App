@@ -50,6 +50,9 @@ class CreatePostRequest {
             if (data.hasOwnProperty('userId')) {
                 obj['userId'] = ApiClient.convertToType(data['userId'], 'Number');
             }
+            if (data.hasOwnProperty('categoryId')) {
+                obj['categoryId'] = ApiClient.convertToType(data['categoryId'], 'Number');
+            }
             if (data.hasOwnProperty('title')) {
                 obj['title'] = ApiClient.convertToType(data['title'], 'String');
             }
@@ -100,6 +103,19 @@ class CreatePostRequest {
      */
     setUserId(userId) {
         this['userId'] = userId;
+    }
+/**
+     * @return {Number}
+     */
+    getCategoryId() {
+        return this.categoryId;
+    }
+
+    /**
+     * @param {Number} categoryId
+     */
+    setCategoryId(categoryId) {
+        this['categoryId'] = categoryId;
     }
 /**
      * @return {String}
@@ -162,6 +178,11 @@ class CreatePostRequest {
  * @member {Number} userId
  */
 CreatePostRequest.prototype['userId'] = undefined;
+
+/**
+ * @member {Number} categoryId
+ */
+CreatePostRequest.prototype['categoryId'] = undefined;
 
 /**
  * @member {String} title

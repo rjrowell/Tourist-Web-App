@@ -10,9 +10,11 @@ import com.rjtoursim.Application;
 import com.rjtoursim.api.model.FetchLikesResponse;
 import com.rjtoursim.api.model.GetLikeResponse;
 import com.rjtoursim.api.model.LikeRequest;
+import com.rjtoursim.entity.Category;
 import com.rjtoursim.entity.Like;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
+import com.rjtoursim.repository.CategoryRepository;
 import com.rjtoursim.repository.LikeRepository;
 import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
@@ -45,6 +47,9 @@ public class AddLikeTest {
   private LikeRepository likeRepository;
 
   @Autowired
+  private CategoryRepository categoryRepository;
+
+  @Autowired
   private MockMvc mockMvc;
 
   @Autowired
@@ -54,13 +59,7 @@ public class AddLikeTest {
 
   User testUser = new User("testuser", "password123", false);
 
-  Post testPost = new Post(
-          testUser,
-          "Test Post",
-          "A test post",
-          "123 Test Street",
-          java.time.LocalDateTime.now()
-    );
+  Post testPost; 
 
   /**
    * Set up test data before each test case.
@@ -73,6 +72,19 @@ public class AddLikeTest {
     if (!setupFlag) {
       // Setup code to create users and posts for testing likes
       userRepository.save(testUser);
+
+      Integer catId = 1;
+      Category testCategory = categoryRepository.findById((catId.longValue())).orElse(null);
+
+      testPost = new Post(
+          testUser,
+          testCategory,
+          "Test Post",
+          "A test post",
+          "123 Test Street",
+          java.time.LocalDateTime.now()
+      );
+
       postRepository.save(testPost);
 
       setupFlag = true;

@@ -76,6 +76,8 @@ paths:
               properties:
                 userId:
                   type: integer
+                categoryId:
+                  type: integer
                 title:
                   type: string
                 description:
@@ -108,6 +110,8 @@ paths:
                       type: object
                       properties:
                         id:
+                          type: integer
+                        categoryId:
                           type: integer
                         username:
                           type: string

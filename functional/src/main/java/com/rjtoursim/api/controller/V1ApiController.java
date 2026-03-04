@@ -8,10 +8,12 @@ import com.rjtoursim.api.model.GetLikeResponse;
 import com.rjtoursim.api.model.LikeRequest;
 import com.rjtoursim.api.model.PostDTO;
 import com.rjtoursim.api.model.UserCredentials;
+import com.rjtoursim.entity.Category;
 import com.rjtoursim.entity.Comment;
 import com.rjtoursim.entity.Like;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
+import com.rjtoursim.repository.CategoryRepository;
 import com.rjtoursim.repository.CommentRepository;
 import com.rjtoursim.repository.LikeRepository;
 import com.rjtoursim.repository.PostRepository;
@@ -42,6 +44,9 @@ public class V1ApiController implements V1Api {
 
   @Autowired
   private LikeRepository likeRepository;
+
+  @Autowired
+  private CategoryRepository categoryRepository;
 
   @Autowired
   private AcheivementCalculator achievementCalculator;
@@ -104,6 +109,8 @@ public class V1ApiController implements V1Api {
   @Override
   public ResponseEntity<Void> createPost(CreatePostRequest createPostRequest) {
     User user = userRepository.findById(createPostRequest.getUserId().longValue()).orElse(null);
+    Category category = categoryRepository.findById(
+        createPostRequest.getCategoryId().longValue()).orElse(null);
     //Check we find the user, if not return a 400 Bad Request status code. 
     // If the user already has a post with the same title, return a 409 Conflict status code
     if (user == null) {
@@ -113,7 +120,8 @@ public class V1ApiController implements V1Api {
     } 
 
     Post newPost = new Post(
-        user, 
+        user,
+        category,
         createPostRequest.getTitle(), 
         createPostRequest.getDescription(), 
         createPostRequest.getAddress(), 
@@ -133,6 +141,7 @@ public class V1ApiController implements V1Api {
       for (Post post : posts) {
         PostDTO postItem = new PostDTO();
         postItem.setId(post.getId().intValue());
+        postItem.setCategoryId(post.getCategory().getId().intValue());
         postItem.setUsername(post.getUser().getUsername());
         postItem.setTitle(post.getTitle());
         postItem.setDescription(post.getDescription());

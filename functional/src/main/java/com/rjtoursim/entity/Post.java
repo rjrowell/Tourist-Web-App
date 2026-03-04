@@ -32,6 +32,11 @@ public class Post {
   @JoinColumn(name = "user_id", nullable = false)
   private User user;
 
+  //Foreign key to category table
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "category_id", nullable = false)
+  private Category category;
+
   @Column(name = "title", nullable = false, length = 255)
   private String title;
 
@@ -70,8 +75,10 @@ public class Post {
    * @param datePosted
    *          - the date the post was posted to the site.
    */
-  public Post(User user, String title, String desc, String address, LocalDateTime datePosted) {
+  public Post(User user, 
+      Category category, String title, String desc, String address, LocalDateTime datePosted) {
     this.user = user;
+    this.category = category;
     this.title = title;
     this.description = desc;
     this.address = address;
@@ -90,6 +97,10 @@ public class Post {
 
   public User getUser() {
     return this.user;
+  }
+
+  public Category getCategory() {
+    return this.category;
   }
 
   public String getTitle() {

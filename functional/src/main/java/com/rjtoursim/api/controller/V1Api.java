@@ -39,7 +39,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-03T13:16:18.488897Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-04T19:40:54.934017Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -373,7 +373,7 @@ public interface V1Api {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"posts\" : [ { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"username\" : \"username\" }, { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"username\" : \"username\" } ] }";
+                    String exampleString = "{ \"posts\" : [ { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"categoryId\" : 6, \"username\" : \"username\" }, { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"categoryId\" : 6, \"username\" : \"username\" } ] }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

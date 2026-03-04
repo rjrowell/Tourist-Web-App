@@ -7,9 +7,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rjtoursim.Application;
 import com.rjtoursim.api.model.CalculateAchievementResponse;
+import com.rjtoursim.entity.Category;
 import com.rjtoursim.entity.Like;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
+import com.rjtoursim.repository.CategoryRepository;
 import com.rjtoursim.repository.LikeRepository;
 import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
@@ -41,6 +43,9 @@ public class CalculateAcheivmentTest {
   private LikeRepository likeRepository;
 
   @Autowired
+  private CategoryRepository categoryRepository;
+
+  @Autowired
   private MockMvc mockMvc;
 
   @Autowired
@@ -65,8 +70,12 @@ public class CalculateAcheivmentTest {
           .atZone(java.time.ZoneId.systemDefault())
           .toLocalDateTime();
 
+      Integer catId = 1;
+      Category testCategory = categoryRepository.findById((catId.longValue())).orElse(null);
+      
       Post testPost = new Post(
           testUser,
+          testCategory,
           "Test Post",
           "A test post for achievements",
           "123 Test Street",

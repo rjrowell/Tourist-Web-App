@@ -1,8 +1,10 @@
 package com.rjtoursim.utils;
 
+import com.rjtoursim.entity.Category;
 import com.rjtoursim.entity.Like;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
+import com.rjtoursim.repository.CategoryRepository;
 import com.rjtoursim.repository.LikeRepository;
 import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
@@ -28,6 +30,9 @@ public class Setup implements CommandLineRunner {
   @Autowired
   private LikeRepository likeRepository;
 
+  @Autowired
+  private CategoryRepository categoryRepository;
+
   @Override
   public void run(String... args) throws Exception {
     // This runs AFTER Spring Boot starts
@@ -38,13 +43,19 @@ public class Setup implements CommandLineRunner {
     
     userRepository.save(adminUser);
     userRepository.save(regularUser);
+
+    Category heritageSite = new Category(1, "Heritage Site");
+    Category shopping = new Category(2, "Shopping");
+
+    categoryRepository.save(heritageSite);
+    categoryRepository.save(shopping);
     
     // Create posts
-    Post post1 = new Post(regularUser, "Portchester Castle", 
+    Post post1 = new Post(regularUser, heritageSite, "Portchester Castle", 
         "A medieval fortress that was developed within the walls of the Roman Saxon" 
         + " Shore fort of Portus Adurni at Portchester, to the east of Fareham in Hampshire.", 
         "Church Lane, Portchester, PO16 9QW", LocalDateTime.now());
-    Post post2 = new Post(regularUser, 
+    Post post2 = new Post(regularUser, shopping,
         "Gunwharf Quays", 
         "A shopping centre located in the Portsea area of the city of Portsmouth in England." 
         + " it was constructed on the site of what had once been HM Gunwharf", 

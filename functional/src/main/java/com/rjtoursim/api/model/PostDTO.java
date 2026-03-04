@@ -21,10 +21,12 @@ import jakarta.annotation.Generated;
  * PostDTO
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-03T13:16:18.488897Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-04T19:40:54.934017Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class PostDTO {
 
   private @Nullable Integer id;
+
+  private @Nullable Integer categoryId;
 
   private @Nullable String username;
 
@@ -55,6 +57,26 @@ public class PostDTO {
 
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  public PostDTO categoryId(Integer categoryId) {
+    this.categoryId = categoryId;
+    return this;
+  }
+
+  /**
+   * Get categoryId
+   * @return categoryId
+   */
+  
+  @Schema(name = "categoryId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("categoryId")
+  public Integer getCategoryId() {
+    return categoryId;
+  }
+
+  public void setCategoryId(Integer categoryId) {
+    this.categoryId = categoryId;
   }
 
   public PostDTO username(String username) {
@@ -167,6 +189,7 @@ public class PostDTO {
     }
     PostDTO postDTO = (PostDTO) o;
     return Objects.equals(this.id, postDTO.id) &&
+        Objects.equals(this.categoryId, postDTO.categoryId) &&
         Objects.equals(this.username, postDTO.username) &&
         Objects.equals(this.title, postDTO.title) &&
         Objects.equals(this.description, postDTO.description) &&
@@ -176,7 +199,7 @@ public class PostDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, title, description, address, datePosted);
+    return Objects.hash(id, categoryId, username, title, description, address, datePosted);
   }
 
   @Override
@@ -184,6 +207,7 @@ public class PostDTO {
     StringBuilder sb = new StringBuilder();
     sb.append("class PostDTO {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    categoryId: ").append(toIndentedString(categoryId)).append("\n");
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");

@@ -8,8 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rjtoursim.Application;
 import com.rjtoursim.api.model.FetchPostsResponse;
 import com.rjtoursim.api.model.PostDTO;
+import com.rjtoursim.entity.Category;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
+import com.rjtoursim.repository.CategoryRepository;
 import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -42,6 +44,9 @@ public class FetchPostsTest {
     
   @Autowired
   private ObjectMapper objectMapper;
+
+  @Autowired
+  private CategoryRepository categoryRepository;
   
   private boolean setupFlag = false;
 
@@ -62,9 +67,13 @@ public class FetchPostsTest {
       java.time.LocalDateTime datePosted = java.time.Instant.parse("2023-01-01T00:00:00Z")
           .atZone(java.time.ZoneId.systemDefault())
           .toLocalDateTime();
+      
+      Integer catId = 1;
+      Category testCategory = categoryRepository.findById((catId.longValue())).orElse(null);
 
       Post testPost1 = new Post(
-          testUser, 
+          testUser,
+          testCategory,
           "Test Post 1",
           "A test post", 
           "123 Test Post Lane", 
@@ -72,7 +81,8 @@ public class FetchPostsTest {
         );
 
       Post testPost2 = new Post(
-          testUser, 
+          testUser,
+          testCategory,
           "Test Post 2",
           "A test post", 
           "123 Test Post Lane", 
@@ -98,12 +108,12 @@ public class FetchPostsTest {
     
     List<PostDTO> posts = response.getPosts();
 
-    assertTrue(response.getPosts().size() == 2, "Expected 2 posts but got " 
+    assertTrue(response.getPosts().size() == 4, "Expected 4 posts but got " 
         + response.getPosts().size());
 
-    assertTrue(posts.get(0).getTitle().equals("Test Post 1") 
+    assertTrue(posts.get(2).getTitle().equals("Test Post 1") 
           &&
-          posts.get(1).getTitle().equals("Test Post 2"), 
+          posts.get(3).getTitle().equals("Test Post 2"), 
           "Post titles do not match expected values");
   }
 }

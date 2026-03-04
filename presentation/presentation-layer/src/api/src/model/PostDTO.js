@@ -50,6 +50,9 @@ class PostDTO {
             if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'Number');
             }
+            if (data.hasOwnProperty('categoryId')) {
+                obj['categoryId'] = ApiClient.convertToType(data['categoryId'], 'Number');
+            }
             if (data.hasOwnProperty('username')) {
                 obj['username'] = ApiClient.convertToType(data['username'], 'String');
             }
@@ -107,6 +110,19 @@ class PostDTO {
      */
     setId(id) {
         this['id'] = id;
+    }
+/**
+     * @return {Number}
+     */
+    getCategoryId() {
+        return this.categoryId;
+    }
+
+    /**
+     * @param {Number} categoryId
+     */
+    setCategoryId(categoryId) {
+        this['categoryId'] = categoryId;
     }
 /**
      * @return {String}
@@ -182,6 +198,11 @@ class PostDTO {
  * @member {Number} id
  */
 PostDTO.prototype['id'] = undefined;
+
+/**
+ * @member {Number} categoryId
+ */
+PostDTO.prototype['categoryId'] = undefined;
 
 /**
  * @member {String} username

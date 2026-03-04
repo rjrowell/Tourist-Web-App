@@ -5,9 +5,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.rjtoursim.Application;
+import com.rjtoursim.entity.Category;
 import com.rjtoursim.entity.Comment;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
+import com.rjtoursim.repository.CategoryRepository;
 import com.rjtoursim.repository.CommentRepository;
 import com.rjtoursim.repository.PostRepository;
 import com.rjtoursim.repository.UserRepository;
@@ -42,6 +44,9 @@ public class ContentModerationTest {
 
   @Autowired
   private CommentRepository commentRepository;
+
+  @Autowired
+  private CategoryRepository categoryRepository;
   
   private boolean setupFlag = false;
 
@@ -99,8 +104,12 @@ public class ContentModerationTest {
    * @return the created Post object
    */
   public Post createTestPost() {
+    Integer catId = 1;
+    Category testCategory = categoryRepository.findById((catId.longValue())).orElse(null);
+
     Post testPost = new Post(
-          userRepository.findByUsername("testuser").orElseThrow(), 
+          userRepository.findByUsername("testuser").orElseThrow(),
+          testCategory,
           "Inappropriate Content", "This post contains inappropriate content.", 
           "123 Test Street", 
           LocalDateTime.now()

@@ -21,10 +21,12 @@ import jakarta.annotation.Generated;
  * CreatePostRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-03T13:16:18.488897Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-04T19:40:54.934017Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class CreatePostRequest {
 
   private @Nullable Integer userId;
+
+  private @Nullable Integer categoryId;
 
   private @Nullable String title;
 
@@ -53,6 +55,26 @@ public class CreatePostRequest {
 
   public void setUserId(Integer userId) {
     this.userId = userId;
+  }
+
+  public CreatePostRequest categoryId(Integer categoryId) {
+    this.categoryId = categoryId;
+    return this;
+  }
+
+  /**
+   * Get categoryId
+   * @return categoryId
+   */
+  
+  @Schema(name = "categoryId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("categoryId")
+  public Integer getCategoryId() {
+    return categoryId;
+  }
+
+  public void setCategoryId(Integer categoryId) {
+    this.categoryId = categoryId;
   }
 
   public CreatePostRequest title(String title) {
@@ -145,6 +167,7 @@ public class CreatePostRequest {
     }
     CreatePostRequest createPostRequest = (CreatePostRequest) o;
     return Objects.equals(this.userId, createPostRequest.userId) &&
+        Objects.equals(this.categoryId, createPostRequest.categoryId) &&
         Objects.equals(this.title, createPostRequest.title) &&
         Objects.equals(this.description, createPostRequest.description) &&
         Objects.equals(this.address, createPostRequest.address) &&
@@ -153,7 +176,7 @@ public class CreatePostRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, title, description, address, datePosted);
+    return Objects.hash(userId, categoryId, title, description, address, datePosted);
   }
 
   @Override
@@ -161,6 +184,7 @@ public class CreatePostRequest {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreatePostRequest {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    categoryId: ").append(toIndentedString(categoryId)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    address: ").append(toIndentedString(address)).append("\n");
