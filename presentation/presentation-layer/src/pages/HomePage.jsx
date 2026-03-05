@@ -10,22 +10,31 @@ function HomePage() {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false)
+  const [categories] = useState([
+    { id: 1, name: 'Heritage Site' },
+    { id: 2, name: 'Shopping' }
+  ])
 
   useEffect(() => {
     loadPosts()
   }, [])
 
-  const loadPosts = async () => {
+  const loadPosts = async (categoryId = null) => {
     try {
       setLoading(true)
 
-      const postFromApi = await apiController.fetchPosts()
+      const postsFromApi = categoryId
+        ? await apiController.fetchPostsByCategory(categoryId)
+        : await apiController.fetchPosts()
 
       const postArray = await Promise.all(
-        postFromApi.map(async (post) => {
+        postsFromApi.map(async (post) => {
           const likesData = await apiController.getLikesForPost(post.id)
           return {
             id: post.id,
+            categoryId: post.categoryId,
             title: post.title,
             description: post.description,
             location: post.address,
@@ -45,7 +54,13 @@ function HomePage() {
 
   const handleFilter = () => {
     console.log('Filter clicked')
-    // TODO: Implement filter functionality
+    setShowFilterDropdown(!showFilterDropdown)
+  }
+
+  const handleCategorySelect = (categoryId) => {
+    setSelectedCategory(categoryId)
+    setShowFilterDropdown(false)
+    loadPosts(categoryId)
   }
 
   const handleSort = () => {
@@ -65,6 +80,9 @@ function HomePage() {
         onFilterClick={handleFilter}
         onSortClick={handleSort}
         onNewPostClick={handleNewPost}
+        showFilterDropdown={showFilterDropdown}
+        categories={categories}
+        onCategorySelect={handleCategorySelect}
       />
       <PostsList posts={posts} />
     </div>

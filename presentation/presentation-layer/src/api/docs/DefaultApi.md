@@ -13,6 +13,8 @@ Method | HTTP request | Description
 [**deletePost**](DefaultApi.md#deletePost) | **DELETE** /v1/content/delete-post/{postId} | Delete a post with a given post ID.
 [**fetchLikes**](DefaultApi.md#fetchLikes) | **GET** /v1/content/fetch-likes/{postId} | Fetch the number of likes for a given post ID.
 [**fetchPosts**](DefaultApi.md#fetchPosts) | **GET** /v1/content/fetch-posts | Fetch all posts.
+[**fetchPostsByCategory**](DefaultApi.md#fetchPostsByCategory) | **GET** /v1/content/fetch-posts-by-category/{catId} | Fetch posts by a given category id.
+[**getCategory**](DefaultApi.md#getCategory) | **GET** /v1/content/get-category/{catId} | Get the associated category name for an id.
 [**getLike**](DefaultApi.md#getLike) | **GET** /v1/content/get-like | Get the like status for a given user ID and post ID.
 [**pingAuth**](DefaultApi.md#pingAuth) | **GET** /v1/authentication | Ping authentication controller to see if it is reachable
 
@@ -389,6 +391,90 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**FetchPostsResponse**](FetchPostsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## fetchPostsByCategory
+
+> FetchPostsResponse fetchPostsByCategory(catId)
+
+Fetch posts by a given category id.
+
+### Example
+
+```javascript
+import RJTourismAPI from 'rjtoursim-api-client';
+
+let apiInstance = new RJTourismAPI.DefaultApi();
+let catId = 56; // Number | 
+apiInstance.fetchPostsByCategory(catId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **catId** | **Number**|  | 
+
+### Return type
+
+[**FetchPostsResponse**](FetchPostsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## getCategory
+
+> CategoryResponse getCategory(catId)
+
+Get the associated category name for an id.
+
+### Example
+
+```javascript
+import RJTourismAPI from 'rjtoursim-api-client';
+
+let apiInstance = new RJTourismAPI.DefaultApi();
+let catId = 56; // Number | 
+apiInstance.getCategory(catId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **catId** | **Number**|  | 
+
+### Return type
+
+[**CategoryResponse**](CategoryResponse.md)
 
 ### Authorization
 

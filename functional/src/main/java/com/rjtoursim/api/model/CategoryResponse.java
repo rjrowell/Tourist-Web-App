@@ -16,32 +16,32 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * GetLikeResponse
+ * CategoryResponse
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-05T11:42:23.764703Z[Europe/London]", comments = "Generator version: 7.13.0")
-public class GetLikeResponse {
+public class CategoryResponse {
 
-  private @Nullable Boolean likeStatus;
+  private @Nullable String categoryName;
 
-  public GetLikeResponse likeStatus(Boolean likeStatus) {
-    this.likeStatus = likeStatus;
+  public CategoryResponse categoryName(String categoryName) {
+    this.categoryName = categoryName;
     return this;
   }
 
   /**
-   * Get likeStatus
-   * @return likeStatus
+   * Get categoryName
+   * @return categoryName
    */
   
-  @Schema(name = "likeStatus", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("likeStatus")
-  public Boolean getLikeStatus() {
-    return likeStatus;
+  @Schema(name = "categoryName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("categoryName")
+  public String getCategoryName() {
+    return categoryName;
   }
 
-  public void setLikeStatus(Boolean likeStatus) {
-    this.likeStatus = likeStatus;
+  public void setCategoryName(String categoryName) {
+    this.categoryName = categoryName;
   }
 
   @Override
@@ -52,20 +52,20 @@ public class GetLikeResponse {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GetLikeResponse getLikeResponse = (GetLikeResponse) o;
-    return Objects.equals(this.likeStatus, getLikeResponse.likeStatus);
+    CategoryResponse categoryResponse = (CategoryResponse) o;
+    return Objects.equals(this.categoryName, categoryResponse.categoryName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(likeStatus);
+    return Objects.hash(categoryName);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class GetLikeResponse {\n");
-    sb.append("    likeStatus: ").append(toIndentedString(likeStatus)).append("\n");
+    sb.append("class CategoryResponse {\n");
+    sb.append("    categoryName: ").append(toIndentedString(categoryName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

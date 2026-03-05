@@ -1,7 +1,9 @@
 package com.rjtoursim.repository;
 
+import com.rjtoursim.entity.Category;
 import com.rjtoursim.entity.Post;
 import com.rjtoursim.entity.User;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -25,4 +27,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
    * @return {@code true} if a matching post exists, {@code false} otherwise
    */
   boolean existsByUserAndTitle(User user, String title);
+
+  List<Post> findByCategory(Category category);
 }

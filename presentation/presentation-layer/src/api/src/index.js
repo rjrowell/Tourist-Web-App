@@ -15,6 +15,7 @@
 import ApiClient from './ApiClient';
 import AuthResponse from './model/AuthResponse';
 import CalculateAchievementResponse from './model/CalculateAchievementResponse';
+import CategoryResponse from './model/CategoryResponse';
 import CreatePostRequest from './model/CreatePostRequest';
 import FetchLikesResponse from './model/FetchLikesResponse';
 import FetchPostsResponse from './model/FetchPostsResponse';
@@ -74,6 +75,12 @@ export {
      * @property {module:model/CalculateAchievementResponse}
      */
     CalculateAchievementResponse,
+
+    /**
+     * The CategoryResponse model constructor.
+     * @property {module:model/CategoryResponse}
+     */
+    CategoryResponse,
 
     /**
      * The CreatePostRequest model constructor.

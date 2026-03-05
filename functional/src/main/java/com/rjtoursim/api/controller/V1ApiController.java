@@ -1,6 +1,7 @@
 package com.rjtoursim.api.controller;
 
 import com.rjtoursim.api.model.CalculateAchievementResponse;
+import com.rjtoursim.api.model.CategoryResponse;
 import com.rjtoursim.api.model.CreatePostRequest;
 import com.rjtoursim.api.model.FetchLikesResponse;
 import com.rjtoursim.api.model.FetchPostsResponse;
@@ -154,6 +155,28 @@ public class V1ApiController implements V1Api {
   }
 
   @Override
+  public ResponseEntity<FetchPostsResponse> fetchPostsByCategory(Integer catId) {
+    FetchPostsResponse response = new FetchPostsResponse();
+    List<Post> posts = postRepository.findByCategory(
+          categoryRepository.findById(catId.longValue()).orElse(null));
+
+    if (!posts.isEmpty()) {
+      for (Post post : posts) {
+        PostDTO postItem = new PostDTO();
+        postItem.setId(post.getId().intValue());
+        postItem.setCategoryId(post.getCategory().getId().intValue());
+        postItem.setUsername(post.getUser().getUsername());
+        postItem.setTitle(post.getTitle());
+        postItem.setDescription(post.getDescription());
+        postItem.setAddress(post.getAddress());
+        postItem.setDatePosted(post.getDatePosted().atOffset(java.time.ZoneOffset.UTC));
+        response.addPostsItem(postItem);
+      }
+    }
+    return new ResponseEntity<>(response, HttpStatus.OK);
+  }
+
+  @Override
   public ResponseEntity<Void> deletePost(Integer postId) {
     Post post = postRepository.findById(postId.longValue()).orElse(null);
     if (post == null) {
@@ -233,6 +256,18 @@ public class V1ApiController implements V1Api {
 
     FetchLikesResponse response = new FetchLikesResponse();
     response.setLikeCount(likeCount);
+    return new ResponseEntity<>(response, HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<CategoryResponse> getCategory(Integer catId) {
+    Category category = categoryRepository.findById(catId.longValue()).orElse(null);
+    if (category.equals(null)) {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    
+    CategoryResponse response = new CategoryResponse();
+    response.setCategoryName(category.getName());
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
 }

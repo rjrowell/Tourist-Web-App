@@ -130,6 +130,8 @@ Class | Method | HTTP request | Description
 *RJTourismAPI.DefaultApi* | [**deletePost**](docs/DefaultApi.md#deletePost) | **DELETE** /v1/content/delete-post/{postId} | Delete a post with a given post ID.
 *RJTourismAPI.DefaultApi* | [**fetchLikes**](docs/DefaultApi.md#fetchLikes) | **GET** /v1/content/fetch-likes/{postId} | Fetch the number of likes for a given post ID.
 *RJTourismAPI.DefaultApi* | [**fetchPosts**](docs/DefaultApi.md#fetchPosts) | **GET** /v1/content/fetch-posts | Fetch all posts.
+*RJTourismAPI.DefaultApi* | [**fetchPostsByCategory**](docs/DefaultApi.md#fetchPostsByCategory) | **GET** /v1/content/fetch-posts-by-category/{catId} | Fetch posts by a given category id.
+*RJTourismAPI.DefaultApi* | [**getCategory**](docs/DefaultApi.md#getCategory) | **GET** /v1/content/get-category/{catId} | Get the associated category name for an id.
 *RJTourismAPI.DefaultApi* | [**getLike**](docs/DefaultApi.md#getLike) | **GET** /v1/content/get-like | Get the like status for a given user ID and post ID.
 *RJTourismAPI.DefaultApi* | [**pingAuth**](docs/DefaultApi.md#pingAuth) | **GET** /v1/authentication | Ping authentication controller to see if it is reachable
 
@@ -138,6 +140,7 @@ Class | Method | HTTP request | Description
 
  - [RJTourismAPI.AuthResponse](docs/AuthResponse.md)
  - [RJTourismAPI.CalculateAchievementResponse](docs/CalculateAchievementResponse.md)
+ - [RJTourismAPI.CategoryResponse](docs/CategoryResponse.md)
  - [RJTourismAPI.CreatePostRequest](docs/CreatePostRequest.md)
  - [RJTourismAPI.FetchLikesResponse](docs/FetchLikesResponse.md)
  - [RJTourismAPI.FetchPostsResponse](docs/FetchPostsResponse.md)

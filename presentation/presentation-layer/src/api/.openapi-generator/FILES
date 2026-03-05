@@ -4,6 +4,7 @@
 README.md
 docs/AuthResponse.md
 docs/CalculateAchievementResponse.md
+docs/CategoryResponse.md
 docs/CreatePostRequest.md
 docs/DefaultApi.md
 docs/FetchLikesResponse.md
@@ -20,6 +21,7 @@ src/api/DefaultApi.js
 src/index.js
 src/model/AuthResponse.js
 src/model/CalculateAchievementResponse.js
+src/model/CategoryResponse.js
 src/model/CreatePostRequest.js
 src/model/FetchLikesResponse.js
 src/model/FetchPostsResponse.js

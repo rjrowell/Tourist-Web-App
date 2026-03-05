@@ -1,5 +1,6 @@
 package com.rjtourism;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -115,5 +116,19 @@ public class FetchPostsTest {
           &&
           posts.get(3).getTitle().equals("Test Post 2"), 
           "Post titles do not match expected values");
+  }
+
+  @Test
+  public void testFetchPostsByCategory() throws Exception {
+    FetchPostsResponse response = objectMapper.readValue(
+        mockMvc.perform(get("/v1/content/fetch-posts-by-category/" + 1))
+          .andExpect(status().isOk())
+          .andReturn()
+          .getResponse()
+          .getContentAsString(), FetchPostsResponse.class);
+    
+    int respSize = response.getPosts().size();
+    assertEquals(respSize, 
+        3, "Expected post size to be 3 but got " + respSize);
   }
 }

@@ -23,7 +23,7 @@ import jakarta.annotation.Generated;
  * FetchPostsResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-04T19:40:54.934017Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-05T11:42:23.764703Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class FetchPostsResponse {
 
   @Valid

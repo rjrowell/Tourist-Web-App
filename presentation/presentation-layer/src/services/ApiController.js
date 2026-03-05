@@ -36,4 +36,15 @@ export default class ApiController {
       throw error;
     }
   }
+
+  async fetchPostsByCategory(catId){
+    try {
+      const response = await this.api.fetchPostsByCategory(catId);
+      console.log(response)
+      return response.posts || [];  // Return empty array if no posts
+    } catch (error) {
+      console.error('Failed to fetch posts:', error);
+      throw error;
+    }
+  }
 }

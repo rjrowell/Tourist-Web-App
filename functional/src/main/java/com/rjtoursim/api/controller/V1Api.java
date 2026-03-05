@@ -6,6 +6,7 @@
 package com.rjtoursim.api.controller;
 
 import com.rjtoursim.api.model.CalculateAchievementResponse;
+import com.rjtoursim.api.model.CategoryResponse;
 import com.rjtoursim.api.model.CreatePostRequest;
 import com.rjtoursim.api.model.FetchLikesResponse;
 import com.rjtoursim.api.model.FetchPostsResponse;
@@ -39,7 +40,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-04T19:40:54.934017Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-05T11:42:23.764703Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -374,6 +375,94 @@ public interface V1Api {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"posts\" : [ { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"categoryId\" : 6, \"username\" : \"username\" }, { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"categoryId\" : 6, \"username\" : \"username\" } ] }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /v1/content/fetch-posts-by-category/{catId} : Fetch posts by a given category id.
+     *
+     * @param catId  (required)
+     * @return OK (status code 200)
+     *         or Not Found - No posts found (status code 404)
+     */
+    @Operation(
+        operationId = "fetchPostsByCategory",
+        summary = "Fetch posts by a given category id.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = FetchPostsResponse.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Not Found - No posts found")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/v1/content/fetch-posts-by-category/{catId}",
+        produces = { "application/json" }
+    )
+    
+    default ResponseEntity<FetchPostsResponse> _fetchPostsByCategory(
+        @Parameter(name = "catId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("catId") Integer catId
+    ) {
+        return fetchPostsByCategory(catId);
+    }
+
+    // Override this method
+    default  ResponseEntity<FetchPostsResponse> fetchPostsByCategory(Integer catId) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"posts\" : [ { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"categoryId\" : 6, \"username\" : \"username\" }, { \"address\" : \"address\", \"description\" : \"description\", \"id\" : 0, \"title\" : \"title\", \"datePosted\" : \"2000-01-23T04:56:07.000+00:00\", \"categoryId\" : 6, \"username\" : \"username\" } ] }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /v1/content/get-category/{catId} : Get the associated category name for an id.
+     *
+     * @param catId  (required)
+     * @return OK (status code 200)
+     */
+    @Operation(
+        operationId = "getCategory",
+        summary = "Get the associated category name for an id.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "OK", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CategoryResponse.class))
+            })
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/v1/content/get-category/{catId}",
+        produces = { "application/json" }
+    )
+    
+    default ResponseEntity<CategoryResponse> _getCategory(
+        @Parameter(name = "catId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("catId") Integer catId
+    ) {
+        return getCategory(catId);
+    }
+
+    // Override this method
+    default  ResponseEntity<CategoryResponse> getCategory(Integer catId) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"categoryName\" : \"categoryName\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

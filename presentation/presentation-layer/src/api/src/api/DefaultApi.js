@@ -14,6 +14,7 @@
 
 import ApiClient from "../ApiClient";
 import CalculateAchievementResponse from '../model/CalculateAchievementResponse';
+import CategoryResponse from '../model/CategoryResponse';
 import CreatePostRequest from '../model/CreatePostRequest';
 import FetchLikesResponse from '../model/FetchLikesResponse';
 import FetchPostsResponse from '../model/FetchPostsResponse';
@@ -434,6 +435,98 @@ export default class DefaultApi {
      */
     fetchPosts() {
       return this.fetchPostsWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Fetch posts by a given category id.
+     * @param {Number} catId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/FetchPostsResponse} and HTTP response
+     */
+    fetchPostsByCategoryWithHttpInfo(catId) {
+      let postBody = null;
+      // verify the required parameter 'catId' is set
+      if (catId === undefined || catId === null) {
+        throw new Error("Missing the required parameter 'catId' when calling fetchPostsByCategory");
+      }
+
+      let pathParams = {
+        'catId': catId
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = FetchPostsResponse;
+      return this.apiClient.callApi(
+        '/v1/content/fetch-posts-by-category/{catId}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Fetch posts by a given category id.
+     * @param {Number} catId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/FetchPostsResponse}
+     */
+    fetchPostsByCategory(catId) {
+      return this.fetchPostsByCategoryWithHttpInfo(catId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get the associated category name for an id.
+     * @param {Number} catId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/CategoryResponse} and HTTP response
+     */
+    getCategoryWithHttpInfo(catId) {
+      let postBody = null;
+      // verify the required parameter 'catId' is set
+      if (catId === undefined || catId === null) {
+        throw new Error("Missing the required parameter 'catId' when calling getCategory");
+      }
+
+      let pathParams = {
+        'catId': catId
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = CategoryResponse;
+      return this.apiClient.callApi(
+        '/v1/content/get-category/{catId}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Get the associated category name for an id.
+     * @param {Number} catId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CategoryResponse}
+     */
+    getCategory(catId) {
+      return this.getCategoryWithHttpInfo(catId)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

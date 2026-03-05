@@ -32,3 +32,31 @@
 .btn-primary:hover {
   background-color: #555;
 }
+
+.filter-wrapper {
+  position: relative;
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 0;
+  z-index: 100;
+  min-width: 150px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.filter-dropdown div {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.filter-dropdown div:hover {
+  background-color: #f5f5f5;
+}

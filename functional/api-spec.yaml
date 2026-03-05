@@ -90,6 +90,27 @@ paths:
       responses:
         '201':
           description: Created
+  '/v1/content/get-category/{catId}':
+    get:
+      operationId: get-category
+      summary: Get the associated category name for an id.
+      parameters:
+        - name: catId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                title: CategoryResponse
+                type: object
+                properties:
+                  categoryName:
+                    type: string
   '/v1/content/fetch-posts':
     get:
       operationId: fetch-posts
@@ -100,30 +121,26 @@ paths:
           content:
             application/json:
               schema:
-                title: FetchPostsResponse
-                type: object
-                properties:
-                  posts:
-                    type: array
-                    items:
-                      title: PostDTO
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        categoryId:
-                          type: integer
-                        username:
-                          type: string
-                        title:
-                          type: string
-                        description:
-                          type: string
-                        address:
-                          type: string
-                        datePosted:
-                          type: string
-                          format: date-time
+                $ref: '#/components/schemas/FetchPostsResponse'
+        '404':
+          description: Not Found - No posts found
+  '/v1/content/fetch-posts-by-category/{catId}':
+    get:
+      operationId: fetch-posts-by-category
+      summary: Fetch posts by a given category id.
+      parameters:
+        - name: catId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchPostsResponse'
         '404':
           description: Not Found - No posts found
   '/v1/content/delete-post/{postId}':
@@ -245,6 +262,31 @@ components:
       required:
         - userId
         - postId
+    FetchPostsResponse:
+      title: FetchPostsResponse
+      type: object
+      properties:
+        posts:
+          type: array
+          items:
+            title: PostDTO
+            type: object
+            properties:
+              id:
+                type: integer
+              categoryId:
+                type: integer
+              username:
+                type: string
+              title:
+                type: string
+              description:
+                type: string
+              address:
+                type: string
+              datePosted:
+                type: string
+                format: date-time
   responses:
     AuthResponse:
       description: OK
