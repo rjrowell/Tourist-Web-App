@@ -1,45 +1,53 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LoginHeader from '../components/LoginHeader'
-import LoginContainer from '../components/LoginContainer'
+import SignUpContainer from '../components/SignUpContainer'
 import ApiController from '../services/ApiController'
 import { hashPassword } from '../services/HashPassword'
 import { useAuth } from '../context/AuthContext'
 
 const apiController = new ApiController()
 
-function LoginPage() {
+function SignUpPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   const navigate = useNavigate()
   const { login } = useAuth()
 
-  const handleLogin = async () => {
-    try {
-      let hashed = await hashPassword(password)
-      await apiController.authenticateUser(username, hashed)
-      login(username)
-      console.log('logged in as:', username)
-      navigate('/')
-    } catch (err) {
-      setError('Invalid username or password')
+  const handleSignUp = async () => {
+    if(password.length === 0){
+      setError('Password cannot be empty')
+    }else{
+      try {
+        let hashed = await hashPassword(password)
+        await apiController.createUser(username, hashed)
+        login(username)
+        navigate('/')
+      } catch (err) {
+        if (err.status === 409) {
+          setError('Username already exists')
+        } else {
+          setError('Failed to create account, please try again')
+        }
+      }
     }
+    
   }
 
   return (
-    <div className="login-page">
+    <div className="signup-page">
       <LoginHeader />
-      <LoginContainer
+      <SignUpContainer
         username={username}
         password={password}
         error={error}
         onUsernameChange={setUsername}
         onPasswordChange={setPassword}
-        onLogin={handleLogin}
+        onSignUp={handleSignUp}
       />
     </div>
   )
 }
 
-export default LoginPage
+export default SignUpPage

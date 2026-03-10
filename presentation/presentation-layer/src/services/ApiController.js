@@ -59,4 +59,15 @@ export default class ApiController {
       throw error
     }
   }
+
+  async createUser(username, password){
+    const request = new UserCredentials(password, username, false)
+    try{
+      await this.api.createUser({ userCredentials: request })
+      return true
+    } catch (error){
+      console.error('Failed to create new user')
+      throw error
+    }
+  }
 }
