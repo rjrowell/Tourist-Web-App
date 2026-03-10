@@ -1,4 +1,5 @@
 import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
 
@@ -7,7 +8,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* Add more routes here for other pages */}
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </div>
   )
