@@ -70,7 +70,7 @@ function HomePage() {
 
   const handleNewPost = () => {
     console.log('New Post clicked')
-    // TODO: Implement new post modal/navigation
+    // TODO: Implement new post navigation
   }
 
   return (
