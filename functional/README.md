@@ -1,26 +1,50 @@
+# Visit Hampshire Web-App
+This is a prototype application of a crowd-sourced tourism website. It is composed of a backend
+comprising a PostgresDB running within Docker and a Java Springboot REST API, and a frontend that is JavaScript-based, using
+REACT and Node. This README gives key information about the use of the application.
 
-# To start app
-1. run sudo docker compose up -d
-2. run sudo docker compose ps
-3. run application
+## To start app
+In order to start the application there are three parts that need to start: the database, API and Web-app. This is acheived as follows:
+### From /functional
+  1. run command ```sudo docker compose up -d``` - uses 'docker-compose.yml' to start the database
+  2. run command ```sudo docker compose ps``` - check the container started correctly
+  3. run src/main/java/com/rjtourism/application.java - starts the springboot API
+### From presentation/presentation-layer
+  1. run command ```npm run dev``` - starts Vite dev server
 
-# ACCESS DATABASE
-docker exec -it rjtourism-postgres psql -U admin -d rjtourism
+Essentially this is starting the database container, then the Java Springboot API. 
+Running application.java automatically starts the API within a Tomcat JVM server, making it accessible to call.
+Then run the Vite dev server, serving the JavaScript React code to a web server that can be accessed.
 
-# BACKUP (Simple)
-docker exec rjtourism-postgres pg_dump -U admin rjtourism > backup.sql
+## Devloping the API
+The Springboot API endpoints are written as an OpenAPI specification, which is used with a generator to create Java endpoint code.
+Therefore to add new functionality to the API you must:
+  1. Add new endpoint/ edit existing endpoint in ```functional/api-spec.yaml```
+  2. Run the command stored in ```functional/codegen-command.txt``` - This runs the OpenApi generator using the api-spec.yaml and codegen-config.yaml to generate code
+  3. Add a new test for the new functionality in ```src/test```
+  4. Override the generated method stub in ```functional/main/.../api/controller/V1ApiController.java```
+  5. Add code to acheive new functionality to the overriden method
 
-# BACKUP (Compressed)
-docker exec rjtourism-postgres pg_dump -U admin rjtourism | gzip > backup.sql.gz
+## Useful Docker Commands
+Below is a set of useful commands for managing the docker container that runs the Postgres DB
 
-# RESTORE
-docker exec -i rjtourism-postgres psql -U admin -d rjtourism < backup.sql
+### ACCESS DATABASE
+```docker exec -it rjtourism-postgres psql -U admin -d rjtourism```
 
-# VIEW LOGS
-docker logs rjtourism-postgres
+### BACKUP (Simple)
+```docker exec rjtourism-postgres pg_dump -U admin rjtourism > backup.sql```
 
-# VIEW REAL-TIME LOGS
-docker logs -f rjtourism-postgres
+### BACKUP (Compressed)
+```docker exec rjtourism-postgres pg_dump -U admin rjtourism | gzip > backup.sql.gz```
+
+### RESTORE
+```docker exec -i rjtourism-postgres psql -U admin -d rjtourism < backup.sql```
+
+### VIEW LOGS
+```docker logs rjtourism-postgres```
+
+### VIEW REAL-TIME LOGS
+```docker logs -f rjtourism-postgres```
 
 # OpenAPI generated API stub
 
