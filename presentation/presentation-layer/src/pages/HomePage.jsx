@@ -15,6 +15,7 @@ function HomePage() {
   const [error, setError] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [showFilterDropdown, setShowFilterDropdown] = useState(false)
+  const [showSortDropdown, setShowSortDropdown] = useState(false)
   const { loggedInUser } = useAuth([])
   const [categories] = useState([
     { id: 1, name: 'Heritage Site' },
@@ -42,7 +43,8 @@ function HomePage() {
             title: post.title,
             description: post.description,
             location: post.address,
-            likes: likesData
+            likes: likesData,
+            datePosted: post.datePosted
           }
         })
       )
@@ -69,7 +71,18 @@ function HomePage() {
 
   const handleSort = () => {
     console.log('Sort clicked')
-    // TODO: Implement sort functionality
+    setShowSortDropdown(!showSortDropdown)
+  }
+
+  const handleSortSelect = (sortType) => {
+    setShowSortDropdown(false)
+    if (sortType === 'likes') {
+      const sorted = [...posts].sort((a, b) => b.likes - a.likes)
+      setPosts(sorted)
+    } else if (sortType === 'date') {
+      const sorted = [...posts].sort((a, b) => new Date(b.datePosted) - new Date(a.datePosted))
+      setPosts(sorted)
+    }
   }
 
   const handleNewPost = () => {
@@ -83,13 +96,15 @@ function HomePage() {
   return (
     <div className="HomePage">
       <Header />
-      <ControlBar 
+      <ControlBar
         onFilterClick={handleFilter}
         onSortClick={handleSort}
         onNewPostClick={handleNewPost}
         showFilterDropdown={showFilterDropdown}
         categories={categories}
         onCategorySelect={handleCategorySelect}
+        showSortDropdown={showSortDropdown}
+        onSortSelect={handleSortSelect}
       />
       <PostsList posts={posts} />
     </div>
