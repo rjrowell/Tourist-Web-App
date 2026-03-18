@@ -11,8 +11,14 @@ function CreatePostForm({ onCreatePost, error }) {
   const [description, setDescription] = useState('')
   const [address, setAddress] = useState('')
   const [categoryId, setCategoryId] = useState(CATEGORIES[0].id)
+  const [formError, setFormError] = useState(null)
 
   const handleSubmit = () => {
+    if (!title.trim() || !description.trim() || !address.trim()) {
+      setFormError('One or more sections is empty')
+      return
+    }
+    setFormError(null)
     onCreatePost(title, description, address, categoryId)
   }
 
@@ -50,7 +56,7 @@ function CreatePostForm({ onCreatePost, error }) {
           </option>
         ))}
       </select>
-      {error && <p className="create-post-error">{error}</p>}
+      {(formError || error) && <p className="create-post-error">{formError || error}</p>}
       <button className="create-post-btn" onClick={handleSubmit}>Create Post</button>
     </div>
   )
