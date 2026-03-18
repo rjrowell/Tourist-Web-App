@@ -74,8 +74,8 @@ paths:
               title: CreatePostRequest
               type: object
               properties:
-                userId:
-                  type: integer
+                username:
+                  type: string
                 categoryId:
                   type: integer
                 title:

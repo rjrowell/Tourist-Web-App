@@ -109,7 +109,7 @@ public class V1ApiController implements V1Api {
 
   @Override
   public ResponseEntity<Void> createPost(CreatePostRequest createPostRequest) {
-    User user = userRepository.findById(createPostRequest.getUserId().longValue()).orElse(null);
+    User user = userRepository.findByUsername(createPostRequest.getUsername()).orElse(null);
     Category category = categoryRepository.findById(
         createPostRequest.getCategoryId().longValue()).orElse(null);
     //Check we find the user, if not return a 400 Bad Request status code. 

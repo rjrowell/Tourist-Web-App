@@ -3,15 +3,19 @@ import Header from '../components/Header'
 import ControlBar from '../components/ControlBar'
 import PostsList from '../components/PostsList'
 import ApiController from '../services/ApiController'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const apiController = new ApiController()
 
 function HomePage() {
   const [posts, setPosts] = useState([])
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [showFilterDropdown, setShowFilterDropdown] = useState(false)
+  const { loggedInUser } = useAuth([])
   const [categories] = useState([
     { id: 1, name: 'Heritage Site' },
     { id: 2, name: 'Shopping' }
@@ -70,7 +74,10 @@ function HomePage() {
 
   const handleNewPost = () => {
     console.log('New Post clicked')
-    // TODO: Implement new post navigation
+    console.log(loggedInUser)
+    if(loggedInUser != null){
+      navigate('/postCreation')
+    }
   }
 
   return (

@@ -47,8 +47,8 @@ class CreatePostRequest {
         if (data) {
             obj = obj || new CreatePostRequest();
 
-            if (data.hasOwnProperty('userId')) {
-                obj['userId'] = ApiClient.convertToType(data['userId'], 'Number');
+            if (data.hasOwnProperty('username')) {
+                obj['username'] = ApiClient.convertToType(data['username'], 'String');
             }
             if (data.hasOwnProperty('categoryId')) {
                 obj['categoryId'] = ApiClient.convertToType(data['categoryId'], 'Number');
@@ -76,6 +76,10 @@ class CreatePostRequest {
      */
     static validateJSON(data) {
         // ensure the json data is a string
+        if (data['username'] && !(typeof data['username'] === 'string' || data['username'] instanceof String)) {
+            throw new Error("Expected the field `username` to be a primitive type in the JSON string but got " + data['username']);
+        }
+        // ensure the json data is a string
         if (data['title'] && !(typeof data['title'] === 'string' || data['title'] instanceof String)) {
             throw new Error("Expected the field `title` to be a primitive type in the JSON string but got " + data['title']);
         }
@@ -92,17 +96,17 @@ class CreatePostRequest {
     }
 
 /**
-     * @return {Number}
+     * @return {String}
      */
-    getUserId() {
-        return this.userId;
+    getUsername() {
+        return this.username;
     }
 
     /**
-     * @param {Number} userId
+     * @param {String} username
      */
-    setUserId(userId) {
-        this['userId'] = userId;
+    setUsername(username) {
+        this['username'] = username;
     }
 /**
      * @return {Number}
@@ -175,9 +179,9 @@ class CreatePostRequest {
 
 
 /**
- * @member {Number} userId
+ * @member {String} username
  */
-CreatePostRequest.prototype['userId'] = undefined;
+CreatePostRequest.prototype['username'] = undefined;
 
 /**
  * @member {Number} categoryId

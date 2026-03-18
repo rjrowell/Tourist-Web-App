@@ -21,10 +21,10 @@ import jakarta.annotation.Generated;
  * CreatePostRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-18T16:20:38.420586Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-18T19:03:39.726951Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class CreatePostRequest {
 
-  private @Nullable Integer userId;
+  private @Nullable String username;
 
   private @Nullable Integer categoryId;
 
@@ -37,24 +37,24 @@ public class CreatePostRequest {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private @Nullable OffsetDateTime datePosted;
 
-  public CreatePostRequest userId(Integer userId) {
-    this.userId = userId;
+  public CreatePostRequest username(String username) {
+    this.username = username;
     return this;
   }
 
   /**
-   * Get userId
-   * @return userId
+   * Get username
+   * @return username
    */
   
-  @Schema(name = "userId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("userId")
-  public Integer getUserId() {
-    return userId;
+  @Schema(name = "username", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("username")
+  public String getUsername() {
+    return username;
   }
 
-  public void setUserId(Integer userId) {
-    this.userId = userId;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public CreatePostRequest categoryId(Integer categoryId) {
@@ -166,7 +166,7 @@ public class CreatePostRequest {
       return false;
     }
     CreatePostRequest createPostRequest = (CreatePostRequest) o;
-    return Objects.equals(this.userId, createPostRequest.userId) &&
+    return Objects.equals(this.username, createPostRequest.username) &&
         Objects.equals(this.categoryId, createPostRequest.categoryId) &&
         Objects.equals(this.title, createPostRequest.title) &&
         Objects.equals(this.description, createPostRequest.description) &&
@@ -176,14 +176,14 @@ public class CreatePostRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, categoryId, title, description, address, datePosted);
+    return Objects.hash(username, categoryId, title, description, address, datePosted);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreatePostRequest {\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    categoryId: ").append(toIndentedString(categoryId)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");

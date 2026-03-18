@@ -1,6 +1,6 @@
 import './AccountAchievements.css'
-import greyTrophy from '../assets/greyTrophy.png'
-import yellowTrophy from '../assets/yellowTrophy.png'
+import greyTrophy from '../assets/greyTrophy.jpg'
+import yellowTrophy from '../assets/yellowTrophy.jpg'
 
 function AccountAchievements({ achievements }) {
   return (

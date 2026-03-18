@@ -9,6 +9,7 @@
   font-weight: 700;
   text-align: center;
   margin-bottom: 30px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .achievements-list {
@@ -38,6 +39,7 @@
   font-weight: 700;
   text-align: center;
   margin: 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .trophy-img {

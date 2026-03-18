@@ -61,7 +61,7 @@ public class CreatePostTest {
   @Test
   public void testCreatePost() throws Exception {
     CreatePostRequest request = new CreatePostRequest();
-    request.setUserId(userRepository.findByUsername("testuser").orElse(null).getId().intValue());
+    request.setUsername(userRepository.findByUsername("testuser").orElse(null).getUsername());
     request.setCategoryId(1);
     request.setTitle("Test Post");
     request.setDescription("This is a test post.");

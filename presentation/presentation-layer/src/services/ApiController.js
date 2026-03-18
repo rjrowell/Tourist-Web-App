@@ -72,11 +72,30 @@ export default class ApiController {
   }
 
   async calculateAchievements(username) {
+    try {
+      const response = await this.api.calculateAchievement(username)
+      return response
+    } catch (error) {
+      console.error('Failed to calculate achievements:', error)
+      throw error
+    }
+  }
+
+  async createPost(username, categoryId, title, description, address) {
   try {
-    const response = await this.api.calculateAchievement(username)
+    const response = await this.api.createPost({
+      createPostRequest: {
+        username,
+        categoryId,
+        title,
+        description,
+        address,
+        datePosted: new Date().toISOString()
+      }
+    })
     return response
   } catch (error) {
-    console.error('Failed to calculate achievements:', error)
+    console.error('Failed to create post:', error)
     throw error
   }
 }
