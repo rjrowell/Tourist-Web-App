@@ -21,7 +21,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("authResponse")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-07T15:23:47.880413Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-18T16:20:38.420586Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class AuthResponse {
 
   private @Nullable Integer resp;

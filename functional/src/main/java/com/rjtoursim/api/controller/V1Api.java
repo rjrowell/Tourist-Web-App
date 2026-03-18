@@ -40,7 +40,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-07T15:23:47.880413Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-18T16:20:38.420586Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -120,9 +120,9 @@ public interface V1Api {
 
 
     /**
-     * GET /v1/account/calculate-achievement/{userId} : Calculate the achievements for a given user ID.
+     * GET /v1/account/calculate-achievement/{username} : Calculate the achievements for a given user ID.
      *
-     * @param userId  (required)
+     * @param username  (required)
      * @return OK (status code 200)
      *         or Not Found - User with the given ID does not exist (status code 404)
      */
@@ -138,18 +138,18 @@ public interface V1Api {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/v1/account/calculate-achievement/{userId}",
+        value = "/v1/account/calculate-achievement/{username}",
         produces = { "application/json" }
     )
     
     default ResponseEntity<CalculateAchievementResponse> _calculateAchievement(
-        @Parameter(name = "userId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("userId") Integer userId
+        @Parameter(name = "username", description = "", required = true, in = ParameterIn.PATH) @PathVariable("username") String username
     ) {
-        return calculateAchievement(userId);
+        return calculateAchievement(username);
     }
 
     // Override this method
-    default  ResponseEntity<CalculateAchievementResponse> calculateAchievement(Integer userId) {
+    default  ResponseEntity<CalculateAchievementResponse> calculateAchievement(String username) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

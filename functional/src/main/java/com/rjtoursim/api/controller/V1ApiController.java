@@ -68,16 +68,16 @@ public class V1ApiController implements V1Api {
   }
 
   @Override
-  public ResponseEntity<CalculateAchievementResponse> calculateAchievement(Integer userId) {
+  public ResponseEntity<CalculateAchievementResponse> calculateAchievement(String username) {
 
-    User user = userRepository.findById(userId.longValue()).orElse(null);
+    User user = userRepository.findByUsername(username).orElse(null);
     if (user == null) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     CalculateAchievementResponse response = new CalculateAchievementResponse();
 
-    if (achievementCalculator.calculate5LikesAcheivement(userId)) {
+    if (achievementCalculator.calculate5LikesAcheivement(user)) {
       response.setFiveLikesAchievement(true);
     } else {
       response.setFiveLikesAchievement(false);

@@ -100,7 +100,7 @@ public class CalculateAcheivmentTest {
     }
 
     CalculateAchievementResponse response = objectMapper.readValue(
-        mockMvc.perform(get("/v1/account/calculate-achievement/" + testUser.getId()))
+        mockMvc.perform(get("/v1/account/calculate-achievement/" + testUser.getUsername()))
           .andExpect(status().isOk())
           .andReturn()
           .getResponse()
