@@ -22,12 +22,12 @@ class LikeRequest {
     /**
      * Constructs a new <code>LikeRequest</code>.
      * @alias module:model/LikeRequest
-     * @param userId {Number} 
+     * @param username {String} 
      * @param postId {Number} 
      */
-    constructor(userId, postId) { 
+    constructor(username, postId) { 
         
-        LikeRequest.initialize(this, userId, postId);
+        LikeRequest.initialize(this, username, postId);
     }
 
     /**
@@ -35,8 +35,8 @@ class LikeRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, userId, postId) { 
-        obj['userId'] = userId;
+    static initialize(obj, username, postId) { 
+        obj['username'] = username;
         obj['postId'] = postId;
     }
 
@@ -51,8 +51,8 @@ class LikeRequest {
         if (data) {
             obj = obj || new LikeRequest();
 
-            if (data.hasOwnProperty('userId')) {
-                obj['userId'] = ApiClient.convertToType(data['userId'], 'Number');
+            if (data.hasOwnProperty('username')) {
+                obj['username'] = ApiClient.convertToType(data['username'], 'String');
             }
             if (data.hasOwnProperty('postId')) {
                 obj['postId'] = ApiClient.convertToType(data['postId'], 'Number');
@@ -76,22 +76,26 @@ class LikeRequest {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
+        // ensure the json data is a string
+        if (data['username'] && !(typeof data['username'] === 'string' || data['username'] instanceof String)) {
+            throw new Error("Expected the field `username` to be a primitive type in the JSON string but got " + data['username']);
+        }
 
         return true;
     }
 
 /**
-     * @return {Number}
+     * @return {String}
      */
-    getUserId() {
-        return this.userId;
+    getUsername() {
+        return this.username;
     }
 
     /**
-     * @param {Number} userId
+     * @param {String} username
      */
-    setUserId(userId) {
-        this['userId'] = userId;
+    setUsername(username) {
+        this['username'] = username;
     }
 /**
      * @return {Number}
@@ -122,12 +126,12 @@ class LikeRequest {
 
 }
 
-LikeRequest.RequiredProperties = ["userId", "postId"];
+LikeRequest.RequiredProperties = ["username", "postId"];
 
 /**
- * @member {Number} userId
+ * @member {String} username
  */
-LikeRequest.prototype['userId'] = undefined;
+LikeRequest.prototype['username'] = undefined;
 
 /**
  * @member {Number} postId

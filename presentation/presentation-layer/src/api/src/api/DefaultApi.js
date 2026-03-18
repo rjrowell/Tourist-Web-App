@@ -557,7 +557,7 @@ export default class DefaultApi {
       let accepts = ['application/json'];
       let returnType = GetLikeResponse;
       return this.apiClient.callApi(
-        '/v1/content/get-like', 'GET',
+        '/v1/content/get-like', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );

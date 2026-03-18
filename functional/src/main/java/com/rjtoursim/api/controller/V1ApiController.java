@@ -200,7 +200,7 @@ public class V1ApiController implements V1Api {
 
   @Override
   public ResponseEntity<Void> addLike(LikeRequest likeRequest) {
-    User user = userRepository.findById(likeRequest.getUserId().longValue()).orElse(null);
+    User user = userRepository.findByUsername(likeRequest.getUsername()).orElse(null);
     Post post = postRepository.findById(likeRequest.getPostId().longValue()).orElse(null);
 
     if (user == null || post == null) {
@@ -220,7 +220,7 @@ public class V1ApiController implements V1Api {
 
   @Override
   public ResponseEntity<GetLikeResponse> getLike(LikeRequest likeRequest) {
-    User user = userRepository.findById(likeRequest.getUserId().longValue()).orElse(null);
+    User user = userRepository.findByUsername(likeRequest.getUsername()).orElse(null);
     Post post = postRepository.findById(likeRequest.getPostId().longValue()).orElse(null);
 
     if (user == null || post == null) {

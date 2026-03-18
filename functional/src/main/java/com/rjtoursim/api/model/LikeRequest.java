@@ -19,10 +19,10 @@ import jakarta.annotation.Generated;
  * LikeRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-18T19:03:39.726951Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-18T23:02:07.666399Z[Europe/London]", comments = "Generator version: 7.13.0")
 public class LikeRequest {
 
-  private Integer userId;
+  private String username;
 
   private Integer postId;
 
@@ -35,29 +35,29 @@ public class LikeRequest {
   /**
    * Constructor with only required parameters
    */
-  public LikeRequest(Integer userId, Integer postId) {
-    this.userId = userId;
+  public LikeRequest(String username, Integer postId) {
+    this.username = username;
     this.postId = postId;
   }
 
-  public LikeRequest userId(Integer userId) {
-    this.userId = userId;
+  public LikeRequest username(String username) {
+    this.username = username;
     return this;
   }
 
   /**
-   * Get userId
-   * @return userId
+   * Get username
+   * @return username
    */
   @NotNull 
-  @Schema(name = "userId", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("userId")
-  public Integer getUserId() {
-    return userId;
+  @Schema(name = "username", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("username")
+  public String getUsername() {
+    return username;
   }
 
-  public void setUserId(Integer userId) {
-    this.userId = userId;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public LikeRequest postId(Integer postId) {
@@ -109,21 +109,21 @@ public class LikeRequest {
       return false;
     }
     LikeRequest likeRequest = (LikeRequest) o;
-    return Objects.equals(this.userId, likeRequest.userId) &&
+    return Objects.equals(this.username, likeRequest.username) &&
         Objects.equals(this.postId, likeRequest.postId) &&
         Objects.equals(this.status, likeRequest.status);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, postId, status);
+    return Objects.hash(username, postId, status);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class LikeRequest {\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    postId: ").append(toIndentedString(postId)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("}");

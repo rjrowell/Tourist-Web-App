@@ -5,6 +5,7 @@
  * It provides methods to interact with the backend API, such as fetching posts, creating new posts, etc.
  */
 import UserCredentials from '../api/src/model/UserCredentials';
+import LikeRequest from '../api/src/model/LikeRequest';
 import { Api } from './ApiInstance';  // Import the configured instance, not the class
 
 export default class ApiController {
@@ -82,21 +83,47 @@ export default class ApiController {
   }
 
   async createPost(username, categoryId, title, description, address) {
-  try {
-    const response = await this.api.createPost({
-      createPostRequest: {
-        username,
-        categoryId,
-        title,
-        description,
-        address,
-        datePosted: new Date().toISOString()
-      }
-    })
-    return response
-  } catch (error) {
-    console.error('Failed to create post:', error)
-    throw error
+    try {
+      const response = await this.api.createPost({
+        createPostRequest: {
+          username,
+          categoryId,
+          title,
+          description,
+          address,
+          datePosted: new Date().toISOString()
+        }
+      })
+      return response
+    } catch (error) {
+      console.error('Failed to create post:', error)
+      throw error
+    }
   }
-}
+
+  async addLike(username, postId, likeStatus){
+    try {
+      const request = new LikeRequest(username, postId)
+      request.setStatus(likeStatus)
+      await this.api.addLike({ likeRequest: request })
+    } catch (error) {
+      console.error('Failed to add like: ', error);
+      throw error
+    }
+  }
+
+  async getLike(username, postId) {
+    try {
+      const request = new LikeRequest(username, postId)
+      console.log('getLike request:', request.getUsername(), request.getPostId())
+      const response = await this.api.getLike( {likeRequest: request} )
+      return response
+    } catch (error) {
+      if (error.status === 404) {
+        return null
+      }
+      console.error('Failed to get like:', error)
+      throw error
+    }
+  }
 }

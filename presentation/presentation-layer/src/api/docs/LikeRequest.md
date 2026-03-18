@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**userId** | **Number** |  | 
+**username** | **String** |  | 
 **postId** | **Number** |  | 
 **status** | **Boolean** |  | [optional] 
 

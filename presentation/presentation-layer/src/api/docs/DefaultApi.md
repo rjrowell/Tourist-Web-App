@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**fetchPosts**](DefaultApi.md#fetchPosts) | **GET** /v1/content/fetch-posts | Fetch all posts.
 [**fetchPostsByCategory**](DefaultApi.md#fetchPostsByCategory) | **GET** /v1/content/fetch-posts-by-category/{catId} | Fetch posts by a given category id.
 [**getCategory**](DefaultApi.md#getCategory) | **GET** /v1/content/get-category/{catId} | Get the associated category name for an id.
-[**getLike**](DefaultApi.md#getLike) | **GET** /v1/content/get-like | Get the like status for a given user ID and post ID.
+[**getLike**](DefaultApi.md#getLike) | **POST** /v1/content/get-like | Get the like status for a given user ID and post ID.
 [**pingAuth**](DefaultApi.md#pingAuth) | **GET** /v1/authentication | Ping authentication controller to see if it is reachable
 
 

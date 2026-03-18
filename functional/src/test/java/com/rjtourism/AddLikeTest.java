@@ -95,7 +95,7 @@ public class AddLikeTest {
   public void testAddLike() throws Exception {
     // Test code to add a like and verify the response
     LikeRequest request = new LikeRequest();
-    request.setUserId(testUser.getId().intValue());
+    request.setUsername(testUser.getUsername());
     request.setPostId(testPost.getId().intValue());
     request.setStatus(true);
 
@@ -120,12 +120,12 @@ public class AddLikeTest {
     likeRepository.save(like);
 
     LikeRequest request = new LikeRequest();
-    request.setUserId(testUser.getId().intValue());
+    request.setUsername(testUser.getUsername());
     request.setPostId(testPost.getId().intValue());
 
     String requestBody = objectMapper.writeValueAsString(request);
     GetLikeResponse response = objectMapper.readValue(
-        mockMvc.perform(get("/v1/content/get-like")
+        mockMvc.perform(post("/v1/content/get-like")
           .contentType(MediaType.APPLICATION_JSON)
           .content(requestBody))
           .andExpect(status().isOk())

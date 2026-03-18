@@ -132,7 +132,7 @@ Class | Method | HTTP request | Description
 *RJTourismAPI.DefaultApi* | [**fetchPosts**](docs/DefaultApi.md#fetchPosts) | **GET** /v1/content/fetch-posts | Fetch all posts.
 *RJTourismAPI.DefaultApi* | [**fetchPostsByCategory**](docs/DefaultApi.md#fetchPostsByCategory) | **GET** /v1/content/fetch-posts-by-category/{catId} | Fetch posts by a given category id.
 *RJTourismAPI.DefaultApi* | [**getCategory**](docs/DefaultApi.md#getCategory) | **GET** /v1/content/get-category/{catId} | Get the associated category name for an id.
-*RJTourismAPI.DefaultApi* | [**getLike**](docs/DefaultApi.md#getLike) | **GET** /v1/content/get-like | Get the like status for a given user ID and post ID.
+*RJTourismAPI.DefaultApi* | [**getLike**](docs/DefaultApi.md#getLike) | **POST** /v1/content/get-like | Get the like status for a given user ID and post ID.
 *RJTourismAPI.DefaultApi* | [**pingAuth**](docs/DefaultApi.md#pingAuth) | **GET** /v1/authentication | Ping authentication controller to see if it is reachable
 
 

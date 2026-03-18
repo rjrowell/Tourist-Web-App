@@ -188,7 +188,7 @@ paths:
         '404':
           description: Not Found - User or post with the given ID does not exist
   '/v1/content/get-like':
-    get:
+    post:
       operationId: get-like
       summary: Get the like status for a given user ID and post ID.
       requestBody:
@@ -253,14 +253,14 @@ components:
       title: LikeRequest
       type: object
       properties:
-        userId:
-          type: integer
+        username:
+          type: string
         postId:
           type: integer
         status:
           type: boolean
       required:
-        - userId
+        - username
         - postId
     FetchPostsResponse:
       title: FetchPostsResponse
