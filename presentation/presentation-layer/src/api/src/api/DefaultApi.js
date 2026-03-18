@@ -132,18 +132,18 @@ export default class DefaultApi {
 
     /**
      * Calculate the achievements for a given user ID.
-     * @param {Number} userId 
+     * @param {String} username 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/CalculateAchievementResponse} and HTTP response
      */
-    calculateAchievementWithHttpInfo(userId) {
+    calculateAchievementWithHttpInfo(username) {
       let postBody = null;
-      // verify the required parameter 'userId' is set
-      if (userId === undefined || userId === null) {
-        throw new Error("Missing the required parameter 'userId' when calling calculateAchievement");
+      // verify the required parameter 'username' is set
+      if (username === undefined || username === null) {
+        throw new Error("Missing the required parameter 'username' when calling calculateAchievement");
       }
 
       let pathParams = {
-        'userId': userId
+        'username': username
       };
       let queryParams = {
       };
@@ -157,7 +157,7 @@ export default class DefaultApi {
       let accepts = ['application/json'];
       let returnType = CalculateAchievementResponse;
       return this.apiClient.callApi(
-        '/v1/account/calculate-achievement/{userId}', 'GET',
+        '/v1/account/calculate-achievement/{username}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null
       );
@@ -165,11 +165,11 @@ export default class DefaultApi {
 
     /**
      * Calculate the achievements for a given user ID.
-     * @param {Number} userId 
+     * @param {String} username 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/CalculateAchievementResponse}
      */
-    calculateAchievement(userId) {
-      return this.calculateAchievementWithHttpInfo(userId)
+    calculateAchievement(username) {
+      return this.calculateAchievementWithHttpInfo(username)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

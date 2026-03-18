@@ -1,0 +1,20 @@
+.account-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.account-avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.account-username {
+  font-size: 20px;
+  font-weight: 700;
+  color: #DE3A3A;
+  margin: 0;
+}

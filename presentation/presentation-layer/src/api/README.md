@@ -123,7 +123,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *RJTourismAPI.DefaultApi* | [**addLike**](docs/DefaultApi.md#addLike) | **POST** /v1/content/add-like | Add a like to a post with a given user ID and post ID.
 *RJTourismAPI.DefaultApi* | [**authenticateUser**](docs/DefaultApi.md#authenticateUser) | **POST** /v1/authentication/authenticate-user | For a given username and password, authenticate them.
-*RJTourismAPI.DefaultApi* | [**calculateAchievement**](docs/DefaultApi.md#calculateAchievement) | **GET** /v1/account/calculate-achievement/{userId} | Calculate the achievements for a given user ID.
+*RJTourismAPI.DefaultApi* | [**calculateAchievement**](docs/DefaultApi.md#calculateAchievement) | **GET** /v1/account/calculate-achievement/{username} | Calculate the achievements for a given user ID.
 *RJTourismAPI.DefaultApi* | [**createPost**](docs/DefaultApi.md#createPost) | **POST** /v1/content/create-post | Create a post with a given title and content.
 *RJTourismAPI.DefaultApi* | [**createUser**](docs/DefaultApi.md#createUser) | **POST** /v1/account/create-user | Create a user account with a given username and password.
 *RJTourismAPI.DefaultApi* | [**deleteComment**](docs/DefaultApi.md#deleteComment) | **DELETE** /v1/content/delete-comment/{commentId} | Delete a comment with a given comment ID.

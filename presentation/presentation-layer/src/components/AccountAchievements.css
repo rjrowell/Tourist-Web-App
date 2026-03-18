@@ -1,0 +1,46 @@
+.account-achievements {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.achievements-title {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.achievements-list {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.achievement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.trophy {
+  font-size: 48px;
+  filter: grayscale(100%);
+}
+
+.trophy.unlocked {
+  filter: none;
+}
+
+.achievement-description {
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+.trophy-img {
+  width: 60px;
+  height: 60px;
+}

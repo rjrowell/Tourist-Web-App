@@ -40,16 +40,16 @@ paths:
           description: Created
         '409':
           description: Conflict - Username already exists
-  '/v1/account/calculate-achievement/{userId}':
+  '/v1/account/calculate-achievement/{username}':
     get:
       operationId: calculate-achievement
       summary: Calculate the achievements for a given user ID.
       parameters:
-        - name: userId
+        - name: username
           in: path
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: OK

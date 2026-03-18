@@ -70,4 +70,14 @@ export default class ApiController {
       throw error
     }
   }
+
+  async calculateAchievements(username) {
+  try {
+    const response = await this.api.calculateAchievement(username)
+    return response
+  } catch (error) {
+    console.error('Failed to calculate achievements:', error)
+    throw error
+  }
+}
 }

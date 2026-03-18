@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**addLike**](DefaultApi.md#addLike) | **POST** /v1/content/add-like | Add a like to a post with a given user ID and post ID.
 [**authenticateUser**](DefaultApi.md#authenticateUser) | **POST** /v1/authentication/authenticate-user | For a given username and password, authenticate them.
-[**calculateAchievement**](DefaultApi.md#calculateAchievement) | **GET** /v1/account/calculate-achievement/{userId} | Calculate the achievements for a given user ID.
+[**calculateAchievement**](DefaultApi.md#calculateAchievement) | **GET** /v1/account/calculate-achievement/{username} | Calculate the achievements for a given user ID.
 [**createPost**](DefaultApi.md#createPost) | **POST** /v1/content/create-post | Create a post with a given title and content.
 [**createUser**](DefaultApi.md#createUser) | **POST** /v1/account/create-user | Create a user account with a given username and password.
 [**deleteComment**](DefaultApi.md#deleteComment) | **DELETE** /v1/content/delete-comment/{commentId} | Delete a comment with a given comment ID.
@@ -110,7 +110,7 @@ No authorization required
 
 ## calculateAchievement
 
-> CalculateAchievementResponse calculateAchievement(userId)
+> CalculateAchievementResponse calculateAchievement(username)
 
 Calculate the achievements for a given user ID.
 
@@ -120,8 +120,8 @@ Calculate the achievements for a given user ID.
 import RJTourismAPI from 'rjtoursim-api-client';
 
 let apiInstance = new RJTourismAPI.DefaultApi();
-let userId = 56; // Number | 
-apiInstance.calculateAchievement(userId).then((data) => {
+let username = "username_example"; // String | 
+apiInstance.calculateAchievement(username).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -134,7 +134,7 @@ apiInstance.calculateAchievement(userId).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | **Number**|  | 
+ **username** | **String**|  | 
 
 ### Return type
 
