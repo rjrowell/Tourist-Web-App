@@ -126,4 +126,26 @@ export default class ApiController {
       throw error
     }
   }
+
+  async checkIsAdmin(username) {
+    try {
+      await this.api.isAdmin(username)
+      return true
+    } catch (error) {
+      if (error.status === 401) {
+        return false
+      }
+      throw error
+    }
+  }
+
+  async deletePost(postId) {
+    try {
+      await this.api.deletePost(postId)
+      return true
+    } catch (error) {
+      console.error('Failed to delete post:', error)
+      throw error
+    }
+  }
 }

@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**fetchPostsByCategory**](DefaultApi.md#fetchPostsByCategory) | **GET** /v1/content/fetch-posts-by-category/{catId} | Fetch posts by a given category id.
 [**getCategory**](DefaultApi.md#getCategory) | **GET** /v1/content/get-category/{catId} | Get the associated category name for an id.
 [**getLike**](DefaultApi.md#getLike) | **POST** /v1/content/get-like | Get the like status for a given user ID and post ID.
+[**isAdmin**](DefaultApi.md#isAdmin) | **GET** /v1/account/is-admin/{username} | Check wether a user is an admin or not
 [**pingAuth**](DefaultApi.md#pingAuth) | **GET** /v1/authentication | Ping authentication controller to see if it is reachable
 
 
@@ -528,6 +529,48 @@ No authorization required
 
 - **Content-Type**: application/json
 - **Accept**: application/json
+
+
+## isAdmin
+
+> isAdmin(username)
+
+Check wether a user is an admin or not
+
+### Example
+
+```javascript
+import RJTourismAPI from 'rjtoursim-api-client';
+
+let apiInstance = new RJTourismAPI.DefaultApi();
+let username = "username_example"; // String | 
+apiInstance.isAdmin(username).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **String**|  | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
 ## pingAuth

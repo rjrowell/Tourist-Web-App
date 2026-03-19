@@ -40,7 +40,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-18T23:02:07.666399Z[Europe/London]", comments = "Generator version: 7.13.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-03-19T14:22:06.795299Z[Europe/London]", comments = "Generator version: 7.13.0")
 @Validated
 @Tag(name = "v1", description = "the v1 API")
 public interface V1Api {
@@ -514,6 +514,39 @@ public interface V1Api {
                 }
             }
         });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
+
+
+    /**
+     * GET /v1/account/is-admin/{username} : Check wether a user is an admin or not
+     *
+     * @param username  (required)
+     * @return User is admin (status code 200)
+     *         or User is not admin (status code 401)
+     */
+    @Operation(
+        operationId = "isAdmin",
+        summary = "Check wether a user is an admin or not",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "User is admin"),
+            @ApiResponse(responseCode = "401", description = "User is not admin")
+        }
+    )
+    @RequestMapping(
+        method = RequestMethod.GET,
+        value = "/v1/account/is-admin/{username}"
+    )
+    
+    default ResponseEntity<Void> _isAdmin(
+        @Parameter(name = "username", description = "", required = true, in = ParameterIn.PATH) @PathVariable("username") String username
+    ) {
+        return isAdmin(username);
+    }
+
+    // Override this method
+    default  ResponseEntity<Void> isAdmin(String username) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

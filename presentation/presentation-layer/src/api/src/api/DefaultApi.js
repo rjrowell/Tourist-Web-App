@@ -578,6 +578,52 @@ export default class DefaultApi {
 
 
     /**
+     * Check wether a user is an admin or not
+     * @param {String} username 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     */
+    isAdminWithHttpInfo(username) {
+      let postBody = null;
+      // verify the required parameter 'username' is set
+      if (username === undefined || username === null) {
+        throw new Error("Missing the required parameter 'username' when calling isAdmin");
+      }
+
+      let pathParams = {
+        'username': username
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = [];
+      let returnType = null;
+      return this.apiClient.callApi(
+        '/v1/account/is-admin/{username}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * Check wether a user is an admin or not
+     * @param {String} username 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     */
+    isAdmin(username) {
+      return this.isAdminWithHttpInfo(username)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
      * Ping authentication controller to see if it is reachable
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */

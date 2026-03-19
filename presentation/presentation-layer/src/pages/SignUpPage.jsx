@@ -22,7 +22,8 @@ function SignUpPage() {
       try {
         let hashed = await hashPassword(password)
         await apiController.createUser(username, hashed)
-        login(username)
+        const adminStatus = await apiController.checkIsAdmin(username)
+        login(username, adminStatus)
         navigate('/')
       } catch (err) {
         if (err.status === 409) {

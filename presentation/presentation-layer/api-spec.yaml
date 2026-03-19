@@ -63,6 +63,21 @@ paths:
                     type: boolean
         '404':
           description: Not Found - User with the given ID does not exist
+  '/v1/account/is-admin/{username}':
+    get:
+      operationId: is-admin
+      summary: Check wether a user is an admin or not
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User is admin
+        '401':
+          description: User is not admin
   '/v1/content/create-post':
     post:
       operationId: create-post

@@ -19,7 +19,8 @@ function LoginPage() {
     try {
       let hashed = await hashPassword(password)
       await apiController.authenticateUser(username, hashed)
-      login(username)
+      const adminStatus = await apiController.checkIsAdmin(username)
+      login(username, adminStatus)
       console.log('logged in as:', username)
       navigate('/')
     } catch (err) {

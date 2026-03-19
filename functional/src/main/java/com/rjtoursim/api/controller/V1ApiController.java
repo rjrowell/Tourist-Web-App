@@ -270,4 +270,14 @@ public class V1ApiController implements V1Api {
     response.setCategoryName(category.getName());
     return new ResponseEntity<>(response, HttpStatus.OK);
   }
+
+  @Override
+  public ResponseEntity<Void> isAdmin(String username) {
+    User user = userRepository.findByUsername(username).orElse(null);
+    if (!user.getIsAdmin()) {
+      return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    } else {
+      return new ResponseEntity<>(HttpStatus.OK);
+    }
+  }
 }

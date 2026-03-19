@@ -9,7 +9,7 @@ export default function PostCard({ post }) {
   const [likeCount, setLikeCount] = useState(post.likes || 0)
   const [isLiked, setIsLiked] = useState(false)
   const [isDisliked, setIsDisliked] = useState(false)
-  const { loggedInUser } = useAuth([])
+  const { loggedInUser, isAdmin } = useAuth([])
 
   useEffect(() => {
     if (loggedInUser != null) {
@@ -64,6 +64,15 @@ export default function PostCard({ post }) {
     }
   }
 
+  const handleDelete = async () => {
+    try {
+      await apiController.deletePost(post.id)
+      window.location.reload()
+    } catch (err) {
+      console.error('Failed to delete post:', err)
+    }
+  }
+
   return (
     <div>
       <div className="post-divider"></div>
@@ -87,6 +96,11 @@ export default function PostCard({ post }) {
               👎
             </button>
           </div>
+          {isAdmin && (
+            <button className="btn btn-delete" onClick={handleDelete}>
+              Delete
+            </button>
+          )}
         </div>
       </div>
     </div>
